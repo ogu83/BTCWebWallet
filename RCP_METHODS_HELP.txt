@@ -1,0 +1,94 @@
+BITCOIN CLI/RPC METHODS
+
+NETWORK INFO
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getnetworkinfo", "params": []}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+LIST WALLETS
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "listwallets", "params": []}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+CREATE WALLET
+Argument #1 - wallet_name
+Type: string, required
+
+Argument #2 - disable_private_keys
+Type: boolean, optional, default=false
+
+Argument #3 - blank
+Type: boolean, optional, default=false
+
+Argument #4 - passphrase
+Type: string
+
+Argument #5 - avoid_reuse
+Type: boolean, optional, default=false
+
+Argument #6 - descriptors
+Type: boolean, optional, default=false
+
+Argument #7 - load_on_startup
+Type: boolean, optional, default=null
+
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "createwallet", "params": ["testwallet1", false, false, "testpassphrase1", false, false]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+LOAD WALLET
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "loadwallet", "params": ["testwallet"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+UNLOAD WALLET
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "unloadwallet", "params": ["wallet"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+GET WALLET INFO
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getwalletinfo", "params": []}' -H 'content-type: text/plain;' http://127.0.0.1:8332/testwallet
+
+GET BALANCE
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getbalance", "params": ["*", 6]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/wallet/testwallet
+
+{"result":50.00000000,"error":null,"id":"curltest"}
+
+GET NEW ADDRESS
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getnewaddress", "params": []}' -H 'content-type: text/plain;' http://127.0.0.1:8332/wallet/testwallet
+
+{"result":"bcrt1qkxngxklprpnltjjrc4flu7z6m4w7w2cc6fw3au","error":null,"id":"curltest"}
+{"result":"bcrt1qhtq9k69cy053jv6esvmnhrdymw369d0nx347r3","error":null,"id":"curltest"} //TEST WALLET 1
+
+GET ADDRESS BY LABEL
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getaddressesbylabel", "params": [""]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/wallet/testwallet
+
+"result":{"":{"purpose":"unknown"},"bcrt1qkxngxklprpnltjjrc4flu7z6m4w7w2cc6fw3au":{"purpose":"receive"}},"error":null,"id":"curltest"}
+
+LIST TRANSACTIONS
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "listtransactions", "params": ["*", 20, 100]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/wallet/testwallet
+
+{
+    "result": [{
+            "address": "bcrt1qkxngxklprpnltjjrc4flu7z6m4w7w2cc6fw3au",
+            "category": "generate",
+            "amount": 50.00000000,
+            "label": "",
+            "vout": 0,
+            "confirmations": 101,
+            "generated": true,
+            "blockhash": "299b12c67fa351964ea4cb4d184ba77c77ecdfa73d6c0b3c5d3310c3596fa9b5",
+            "blockheight": 1,
+            "blockindex": 0,
+            "blocktime": 1641209267,
+            "txid": "7e08d72d0f1a802a53fef948e82412bf011b2b0f7b2d5b2f0de364197569d32f",
+            "walletconflicts": [],
+            "time": 1641209267,
+            "timereceived": 1641209267,
+            "bip125-replaceable": "no"
+        }
+    ],
+    "error": null,
+    "id": "curltest"
+}
+
+GET RECIEVED BY ADDRESS
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getreceivedbyaddress", "params": ["tb1qjz9398qe50asfdfl0ek8a8a8e56f6nycee2rur", 6]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/wallet/testwallet
+
+SEND TO ADDRESS
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "sendtoaddress", "params": ["bcrt1qhtq9k69cy053jv6esvmnhrdymw369d0nx347r3", 0.1, "drinks", "room77", true, true, null, "unset", null, 1.1]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/wallet/testwallet
+
+{"result":"d98d99c6360c58df22178e17332f031adf57eb3e318ad5c68d1e1e0e8853a52a","error":null,"id":"curltest"}
+
+WALLET PASSPHRASE
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "walletpassphrase", "params": ["testpassphrase1", 60]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/wallet/testwallet
