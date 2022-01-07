@@ -1,10 +1,67 @@
 BITCOIN CLI/RPC METHODS
 
+ERROR
+{
+    "code": -18,
+    "message": "Requested wallet does not exist or is not loaded"
+}
+
+
 NETWORK INFO
 curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getnetworkinfo", "params": []}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
 
+{
+    "result": {
+        "version": 220000,
+        "subversion": "/Satoshi:22.0.0/",
+        "protocolversion": 70016,
+        "localservices": "0000000000000408",
+        "localservicesnames": ["WITNESS", "NETWORK_LIMITED"],
+        "localrelay": true,
+        "timeoffset": 0,
+        "networkactive": true,
+        "connections": 0,
+        "connections_in": 0,
+        "connections_out": 0,
+        "networks": [{
+                "name": "ipv4",
+                "limited": false,
+                "reachable": true,
+                "proxy": "",
+                "proxy_randomize_credentials": false
+            }, {
+                "name": "ipv6",
+                "limited": false,
+                "reachable": true,
+                "proxy": "",
+                "proxy_randomize_credentials": false
+            }, {
+                "name": "onion",
+                "limited": true,
+                "reachable": false,
+                "proxy": "",
+                "proxy_randomize_credentials": false
+            }, {
+                "name": "i2p",
+                "limited": true,
+                "reachable": false,
+                "proxy": "",
+                "proxy_randomize_credentials": false
+            }
+        ],
+        "relayfee": 0.00001000,
+        "incrementalfee": 0.00001000,
+        "localaddresses": [],
+        "warnings": ""
+    },
+    "error": null,
+    "id": "curltest"
+}
+
 LIST WALLETS
 curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "listwallets", "params": []}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+{"result":["testwallet1","testwallet"],"error":null,"id":"curltest"}
 
 CREATE WALLET
 Argument #1 - wallet_name
@@ -82,13 +139,180 @@ curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltes
     "id": "curltest"
 }
 
+{
+    "result": [{
+            "address": "bcrt1qkxngxklprpnltjjrc4flu7z6m4w7w2cc6fw3au",
+            "category": "generate",
+            "amount": 50.00000000,
+            "label": "",
+            "vout": 0,
+            "confirmations": 101,
+            "generated": true,
+            "blockhash": "299b12c67fa351964ea4cb4d184ba77c77ecdfa73d6c0b3c5d3310c3596fa9b5",
+            "blockheight": 1,
+            "blockindex": 0,
+            "blocktime": 1641209267,
+            "txid": "7e08d72d0f1a802a53fef948e82412bf011b2b0f7b2d5b2f0de364197569d32f",
+            "walletconflicts": [],
+            "time": 1641209267,
+            "timereceived": 1641209267,
+            "bip125-replaceable": "no"
+        }, {
+            "address": "bcrt1qkxngxklprpnltjjrc4flu7z6m4w7w2cc6fw3au",
+            "category": "immature",
+            "amount": 50.00000000,
+            "label": "",
+            "vout": 0,
+            "confirmations": 100,
+            "generated": true,
+            "blockhash": "1be0148dd31844b625063ff49f6c91ddc8a21744f597edcf21e3bc76469ca3ed",
+            "blockheight": 2,
+            "blockindex": 0,
+            "blocktime": 1641209268,
+            "txid": "b0be758f68734dea79940f19290f373e4889c99551acd499dd1837d6b9bbddd1",
+            "walletconflicts": [],
+            "time": 1641209267,
+            "timereceived": 1641209267,
+            "bip125-replaceable": "no"
+        }
+    ],
+    "error": null,
+    "id": "curltest"
+}
+
+{
+    "result": [{
+            "address": "bcrt1qhtq9k69cy053jv6esvmnhrdymw369d0nx347r3",
+            "category": "receive",
+            "amount": 0.09999845,
+            "label": "",
+            "vout": 1,
+            "confirmations": 202,
+            "blockhash": "7d546c27d030743356aad998c25b75c67b85cfff9ad17dae06d99ba298c944db",
+            "blockheight": 102,
+            "blockindex": 1,
+            "blocktime": 1641240308,
+            "txid": "d98d99c6360c58df22178e17332f031adf57eb3e318ad5c68d1e1e0e8853a52a",
+            "walletconflicts": [],
+            "time": 1641240055,
+            "timereceived": 1641240055,
+            "bip125-replaceable": "no"
+        }, {
+            "address": "bcrt1qhtq9k69cy053jv6esvmnhrdymw369d0nx347r3",
+            "category": "receive",
+            "amount": 0.99999845,
+            "label": "",
+            "vout": 1,
+            "confirmations": 101,
+            "blockhash": "37fa40bf00f85fa19e05172f630d325e6ad36eb681c42a6b3ff7b868faee9dfb",
+            "blockheight": 203,
+            "blockindex": 1,
+            "blocktime": 1641240939,
+            "txid": "400926cd0fc7ca397dc3a0beebe4f15564e4f71f75b5b36de2533bba9455d807",
+            "walletconflicts": [],
+            "time": 1641240365,
+            "timereceived": 1641240365,
+            "bip125-replaceable": "no"
+        }
+    ],
+    "error": null,
+    "id": "curltest"
+}
+
 GET RECIEVED BY ADDRESS
 curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getreceivedbyaddress", "params": ["tb1qjz9398qe50asfdfl0ek8a8a8e56f6nycee2rur", 6]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/wallet/testwallet
 
 SEND TO ADDRESS
+
+Argument #1 - address
+Type: string, required
+
+The bitcoin address to send to.
+
+Argument #2 - amount
+Type: numeric or string, required
+
+The amount in BTC to send. eg 0.1
+
+Argument #3 - comment
+Type: string, optional
+
+A comment used to store what the transaction is for.
+This is not part of the transaction, just kept in your wallet.
+
+Argument #4 - comment_to
+Type: string, optional
+
+A comment to store the name of the person or organization
+to which you’re sending the transaction. This is not part of the transaction, just kept in your wallet.
+
+Argument #5 - subtractfeefromamount
+Type: boolean, optional, default=false
+
+The fee will be deducted from the amount being sent.
+The recipient will receive less bitcoins than you enter in the amount field.
+
+Argument #6 - replaceable
+Type: boolean, optional, default=wallet default
+
+Allow this transaction to be replaced by a transaction with higher fees via BIP 125
+
+Argument #7 - conf_target
+Type: numeric, optional, default=wallet -txconfirmtarget
+
+Confirmation target in blocks
+
+Argument #8 - estimate_mode
+Type: string, optional, default=unset
+
+The fee estimate mode, must be one of (case insensitive):
+“unset” “economical” “conservative”
+
+Argument #9 - avoid_reuse
+Type: boolean, optional, default=true
+
+(only available if avoid_reuse wallet flag is set) Avoid spending from dirty addresses; addresses are considered
+dirty if they have previously been used in a transaction.
+
 curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "sendtoaddress", "params": ["bcrt1qhtq9k69cy053jv6esvmnhrdymw369d0nx347r3", 0.1, "drinks", "room77", true, true, null, "unset", null, 1.1]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/wallet/testwallet
 
 {"result":"d98d99c6360c58df22178e17332f031adf57eb3e318ad5c68d1e1e0e8853a52a","error":null,"id":"curltest"}
 
 WALLET PASSPHRASE
 curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "walletpassphrase", "params": ["testpassphrase1", 60]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/wallet/testwallet
+
+RECIEVED BY ADDRESS
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "listreceivedbyaddress", "params": [6, true, true]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+{"result":[{"address":"bcrt1qhtq9k69cy053jv6esvmnhrdymw369d0nx347r3","amount":1.09999690,"confirmations":101,"label":"","txids":["400926cd0fc7ca397dc3a0beebe4f15564e4f71f75b5b36de2533bba9455d807","d98d99c6360c58df22178e17332f031adf57eb3e318ad5c68d1e1e0e8853a52a"]}],"error":null,"id":"curltest"}
+
+
+GET TRANSACTION
+curl --user rpcuser:rpcpassword --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "gettransaction", "params": ["400926cd0fc7ca397dc3a0beebe4f15564e4f71f75b5b36de2533bba9455d807"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+{
+    "result": {
+        "amount": 0.99999845,
+        "confirmations": 101,
+        "blockhash": "37fa40bf00f85fa19e05172f630d325e6ad36eb681c42a6b3ff7b868faee9dfb",
+        "blockheight": 203,
+        "blockindex": 1,
+        "blocktime": 1641240939,
+        "txid": "400926cd0fc7ca397dc3a0beebe4f15564e4f71f75b5b36de2533bba9455d807",
+        "walletconflicts": [],
+        "time": 1641240365,
+        "timereceived": 1641240365,
+        "bip125-replaceable": "no",
+        "details": [{
+                "address": "bcrt1qhtq9k69cy053jv6esvmnhrdymw369d0nx347r3",
+                "category": "receive",
+                "amount": 0.99999845,
+                "label": "",
+                "vout": 1
+            }
+        ],
+        "hex": "020000000001012aa553880e1e1e8dc6d58a313eeb57df1a032f33178e1722df580c36c6998dd90000000000fdffffff02807a7723010000001600143c7e699544868e7518a7c85ab1f3368101e9829d65e0f50500000000160014bac05b68b823e919335983373b8da4dba3a2b5f302473044022006814411b35eba581a55bb6403ea8b25012a5b208753b05c3c6d1dee31b80af5022024ec4ae53b93f51aad9756488ae9aafb5dd330ba7e488a76d78ebfbf6093ab05012102a716e826f8ecd27d6d3108a705b11b445f12046c52465c682a105342ca2aa39fca000000"
+    },
+    "error": null,
+    "id": "curltest"
+}

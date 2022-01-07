@@ -21,7 +21,8 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var id = Guid.NewGuid();
-        var networkInfo = await _rpcClient.GetNetworkInfo(new NetworkInfoRequest($"BTCWebWallet_{id}"));
+        var networkInfo = await _rpcClient.GetNetworkInfo(new NetworkInfoRequest($"BTCWebWallet_{id}"));        
+        var newWallet = await _rpcClient.GetCreateWallet(new CreateWalletRequest($"BTCWebWallet_{id}", "testwallet3", "passphrase3"));
         var wallets = await _rpcClient.GetListWallets(new ListWalletsRequest($"BTCWebWallet_{id}"));
         return View();
     }

@@ -19,5 +19,11 @@ public abstract class RPCRequest : RPCSerializable
     public string Method { get; set; }
     public string Id { get; set; }
     public string Jsonrpc { get; set; }
-    public virtual Dictionary<string,string> Params { get; set; } = new Dictionary<string, string>();
+    public virtual List<object> Params 
+    {         
+        get 
+        {
+            return new List<object>();
+        }
+    }
 }
