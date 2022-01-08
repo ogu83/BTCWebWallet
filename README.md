@@ -1,6 +1,6 @@
 # BTC Web Wallet
 
-This is a Bitcoin Wallet Web User Interface depending on bitcoin core application and JsonRPC 1.0. 
+This is a Bitcoin Wallet Web User Interface depending on bitcoin core application and JsonRPC 1.0.
 
 ## Installation
 
@@ -47,6 +47,13 @@ dotnet build
 dotnet run
 ```
 Goto https://localhost:9999
+
+## Tech Stack
+- bitcoin core
+- dotnet core 6.0
+- MVC Web App with Razor Pages.
+- Jquery
+- Bootstrap
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
