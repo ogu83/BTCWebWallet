@@ -17,12 +17,12 @@ In this section there is commands to install this product to servers or desktop 
 brew install bitcoin 
 ```
 The default path of the daemon would be like */usr/local/opt/bitcoin/bin/bitcoind* 
-If you would install **bitcoind** into another path you should also specify that in the **appSettings.json**. 
+If you would install **bitcoind** into another path you should also specify that in the [appSettings.json](appSettings.json). 
 If you are using the default path for **bitcoind**, there is nothing to do more here.
 
-**bitcoin.conf** file is the config of the bitcoin node which will be stored in your computer. 
+[bitcoin.conf](bitcoin.conf) file is the config of the bitcoin node which will be stored in your computer. 
 With default parameters it will install a prune (2GB) node, encryptwallets will run in main chain. 
-If you want to do advanced stuff with it please read bitcoid manual pages.
+If you want to do advanced stuff with it please read [bitcoid manual pages](bitcoind_manual.txt).
 
 #### Install [DotNet Core](https://dotnet.microsoft.com/en-us/download/dotnet/scripts)
 ```bash
