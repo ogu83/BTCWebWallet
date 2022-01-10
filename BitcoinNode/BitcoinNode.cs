@@ -47,9 +47,12 @@ public class BitcoinNode : IBitcoinNode, IDisposable
 
     public void Dispose()
     {
-        _process.Kill(true);
-        _process.WaitForExit(10000);
-        _process.Dispose();
+        if (_process != null)
+        {
+            _process.Kill(true);
+            _process.WaitForExit(10000);
+            _process.Dispose();
+        }
     }
 
     public void Terminate()
