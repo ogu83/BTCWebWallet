@@ -1,5 +1,6 @@
 using System.Net;
 using Newtonsoft.Json;
+using System;
 
 namespace BTCWebWallet.RPCClient;
 
@@ -44,8 +45,15 @@ public class RPCClient : IRPCClient
             var requestStrContent = new StringContent(requestStr);
             var response = await c.PostAsync(uri(), requestStrContent);
             var strResult = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<T>(strResult);
-            return result;
+            try
+            {
+                var result = JsonConvert.DeserializeObject<T>(strResult);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new RPCSerializeException(strResult, typeof(T).ToString(), ex);                                   
+            }                                    
         }        
     }
 

@@ -25,7 +25,7 @@ builder.Services.AddControllersWithViews();
 
 var configuration = builder.Configuration;
 
-
+//BITCOIN NODE
 var bitcoinExePath = configuration.GetSection("BitcoinSettings").GetSection("executablePath").Value;
 var bitcoinCfgPath = configuration.GetSection("BitcoinSettings").GetSection("configPath").Value;
 bitcoinCfgPath = $"{builder.Environment.ContentRootPath}{bitcoinCfgPath}";
@@ -41,24 +41,15 @@ Directory.CreateDirectory(bitcoinDataPath);
 
 builder.Services.AddSingleton<IBitcoinNode>(x => ActivatorUtilities.CreateInstance<BitcoinNode>(x, bitcoinExePath, bitcoinCfgPath, bitcoinWltPath, bitcoinDataPath));
 
-
+//RPC CLIENT
 var rpcbind = configuration.GetSection("RPC").GetSection("rpcbind").Value;
 var rpcport = configuration.GetSection("RPC").GetSection("rpcport").Value;
 var rpcuser = configuration.GetSection("RPC").GetSection("rpcuser").Value;
 var rpcpassword = configuration.GetSection("RPC").GetSection("rpcpassword").Value;
 builder.Services.AddSingleton<IRPCClient>(x => ActivatorUtilities.CreateInstance<RPCClient>(x, rpcbind, rpcport, rpcuser, rpcpassword));
 
-var app = builder.Build();
 
-var appLifetime = app.Lifetime;
-appLifetime.ApplicationStopping.Register(() =>
-{
-    app.Logger.LogInformation("App Ended");
-    Console.WriteLine("Application Ended");
-    var bitcoinNode = app.Services.GetService<IBitcoinNode>();
-    if (bitcoinNode != null) 
-        bitcoinNode.Terminate();
-});
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
