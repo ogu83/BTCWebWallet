@@ -1,7 +1,7 @@
 // using Microsoft.AspNetCore.Identity;
 // using Microsoft.EntityFrameworkCore;
 // using BTCWebWallet.Data;
-using System.IO;
+// using System.IO;
 using BTCWebWallet.RPCClient;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +28,15 @@ builder.Services.AddControllersWithViews();
 // builder.Logging.ClearProviders();
 builder.Logging.AddSimpleConsole();
 
+//RPC CLIENT
+var rpcbind = configuration.GetSection("RPC").GetSection("rpcbind").Value;
+var rpcport = configuration.GetSection("RPC").GetSection("rpcport").Value;
+var rpcuser = configuration.GetSection("RPC").GetSection("rpcuser").Value;
+var rpcpassword = configuration.GetSection("RPC").GetSection("rpcpassword").Value;
+var rpcallowip = configuration.GetSection("RPC").GetSection("rpcallowip").Value;
+builder.Services.AddSingleton<IRPCClient>(
+    x => ActivatorUtilities.CreateInstance<RPCClient>(x, rpcbind, rpcport, rpcuser, rpcpassword));
+
 //BITCOIN NODE
 var bitcoinExePath = configuration.GetSection("BitcoinSettings").GetSection("executablePath").Value;
 var bitcoinCfgPath = configuration.GetSection("BitcoinSettings").GetSection("configPath").Value;
@@ -42,14 +51,17 @@ bitcoinDataPath = $"{builder.Environment.ContentRootPath}{bitcoinDataPath}";
 Directory.CreateDirectory(bitcoinWltPath);
 Directory.CreateDirectory(bitcoinDataPath);
 
-builder.Services.AddSingleton<IBitcoinNode>(x => ActivatorUtilities.CreateInstance<BitcoinNode>(x, bitcoinExePath, bitcoinCfgPath, bitcoinWltPath, bitcoinDataPath));
-
-//RPC CLIENT
-var rpcbind = configuration.GetSection("RPC").GetSection("rpcbind").Value;
-var rpcport = configuration.GetSection("RPC").GetSection("rpcport").Value;
-var rpcuser = configuration.GetSection("RPC").GetSection("rpcuser").Value;
-var rpcpassword = configuration.GetSection("RPC").GetSection("rpcpassword").Value;
-builder.Services.AddSingleton<IRPCClient>(x => ActivatorUtilities.CreateInstance<RPCClient>(x, rpcbind, rpcport, rpcuser, rpcpassword));
+builder.Services.AddSingleton<IBitcoinNode>(
+    x => ActivatorUtilities.CreateInstance<BitcoinNode>(x, 
+        bitcoinExePath, 
+        bitcoinCfgPath, 
+        bitcoinWltPath, 
+        bitcoinDataPath,
+        rpcbind,
+        rpcport,
+        rpcuser,
+        rpcpassword,
+        rpcallowip));
 
 
 var app = builder.Build();
