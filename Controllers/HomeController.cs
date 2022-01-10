@@ -29,12 +29,11 @@ public class HomeController : Controller
         var id = Guid.NewGuid();
         
         var networkInfo = await _rpcClient.GetNetworkInfo(new NetworkInfoRequest($"BTCWebWallet_{id}"));        
+        _logger.LogInformation($"Network Info: {networkInfo.ToString()}");
+        // _logger.LogInformation()
         //var newWallet = await _rpcClient.GetCreateWallet(new CreateWalletRequest($"BTCWebWallet_{id}", "testwallet0", "passphrase0"));
         //var wallets = await _rpcClient.GetListWallets(new ListWalletsRequest($"BTCWebWallet_{id}"));
-        
-        Console.WriteLine("Network Info");
-        Console.WriteLine(networkInfo.ToString());
-        
+                           
         // Console.WriteLine("New Wallet");
         // Console.WriteLine(newWallet.ToString());
         

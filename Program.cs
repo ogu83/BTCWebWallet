@@ -5,6 +5,7 @@ using System.IO;
 using BTCWebWallet.RPCClient;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 builder.Services.AddRazorPages();
 
@@ -23,7 +24,9 @@ builder.Services.AddRazorPages();
 //     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-var configuration = builder.Configuration;
+//LOGGING
+// builder.Logging.ClearProviders();
+builder.Logging.AddSimpleConsole();
 
 //BITCOIN NODE
 var bitcoinExePath = configuration.GetSection("BitcoinSettings").GetSection("executablePath").Value;
@@ -52,7 +55,7 @@ builder.Services.AddSingleton<IRPCClient>(x => ActivatorUtilities.CreateInstance
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName.ToLower().Contains("Development".ToLower()))
 {
     // app.UseMigrationsEndPoint();
 }
