@@ -5,7 +5,7 @@ using BTCWebWallet.RPCClient;
 
 namespace BTCWebWallet.Controllers;
 
-public class HomeController : Controller
+public class HomeController : BaseController
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IRPCClient _rpcClient;
@@ -26,10 +26,14 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var id = Guid.NewGuid();
+        var  model = new DashboardViewModel();
+
+        var networkInfoResponse = await _rpcClient.GetNetworkInfo(new NetworkInfoRequest(rpc_id));
+        if (!networkInfoResponse.HasError) 
+        {
+            model.NetworkInfo = networkInfoResponse.Result;
+        }
         
-        var networkInfo = await _rpcClient.GetNetworkInfo(new NetworkInfoRequest($"BTCWebWallet_{id}"));        
-        _logger.LogInformation($"Network Info: {networkInfo.ToString()}");
         // _logger.LogInformation()
         //var newWallet = await _rpcClient.GetCreateWallet(new CreateWalletRequest($"BTCWebWallet_{id}", "testwallet0", "passphrase0"));
         //var wallets = await _rpcClient.GetListWallets(new ListWalletsRequest($"BTCWebWallet_{id}"));
@@ -40,7 +44,7 @@ public class HomeController : Controller
         // Console.WriteLine("Wallets");
         // Console.WriteLine(wallets);
         
-        return View();
+        return View(model);
     }
 
     public IActionResult Shutdown() 
