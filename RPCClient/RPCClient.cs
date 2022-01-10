@@ -48,6 +48,10 @@ public class RPCClient : IRPCClient
             try
             {
                 var result = JsonConvert.DeserializeObject<T>(strResult);
+                if (result == null)
+                {
+                    throw new ArgumentNullException("RPCClient Response Can't be null");
+                }
                 return result;
             }
             catch (Exception ex)
