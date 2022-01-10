@@ -87,10 +87,35 @@
                             }                            
                         </div>
                         <div class="col-md-12">
+                            <label for="tbl_localaddresses">Local Addresses</label>
+                            @if (Model.NetworkInfo.Localaddresses != null) 
+                            {
+                                <table id="tbl_localaddresses">
+                                    <thead>
+                                        <tr>
+                                            <th>Address</th>
+                                            <th>Port</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var item in Model.NetworkInfo.Localaddresses)
+                                    {
+                                        <tr>
+                                            <td>@item.Address</td>
+                                            <td>@item.Port</td>
+                                            <td>@item.Score</td>
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
+                        <div class="col-md-12">
                             <label for="tbl_network">Networks</label>
                             @if (Model.NetworkInfo.Networks != null) 
                             {
-                                <table class="table">
+                                <table id="tbl_network" class="table">
                                     <thead>
                                         <tr>
                                             <th>Name</th>

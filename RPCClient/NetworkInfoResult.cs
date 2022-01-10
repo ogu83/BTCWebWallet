@@ -15,6 +15,6 @@ public class NetworkInfoResult
     public Network[]? Networks { get; set; }
     public double Relayfee { get; set; }
     public double Incrementalfee { get; set; }
-    public string[]? Localaddresses { get; set; }
+    public LocalAddress[]? Localaddresses { get; set; }
     public string? Warnings { get; set; }
 }
