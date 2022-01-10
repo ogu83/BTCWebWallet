@@ -33,6 +33,10 @@ public class HomeController : BaseController
         {
             model.NetworkInfo = networkInfoResponse.Result;
         }
+        else 
+        {
+            //TODO: Show RPC Error Some Where maybe a view page for that. Custom RPC Error Page
+        }
         
         // _logger.LogInformation()
         //var newWallet = await _rpcClient.GetCreateWallet(new CreateWalletRequest($"BTCWebWallet_{id}", "testwallet0", "passphrase0"));

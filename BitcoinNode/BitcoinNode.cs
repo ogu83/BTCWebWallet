@@ -40,6 +40,16 @@ public class BitcoinNode : IBitcoinNode, IDisposable
 
         var args = $" -conf={_configPath} -walletdir={_wltPath} -datadir={_dataPath} -rpcbind={_rpcbind}:{_rpcport} -rpcuser={_rpcuser} -rpcpassword={_rpcpassword} -rpcallowip={_rpcallowip}";
 
+        var oldProcesses = Process.GetProcessesByName("bitcoind").Union(Process.GetProcessesByName("bitcoind.exe"));
+        if (oldProcesses != null) 
+        {
+            foreach (var p in oldProcesses)
+            {
+                p.Kill(true);
+                p.WaitForExit(10000);
+            }
+        }
+
         _process = new Process
         {
             StartInfo = new ProcessStartInfo

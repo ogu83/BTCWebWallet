@@ -17,21 +17,21 @@
                 <div class="card-header">Network Status</div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">Version</div>
+                        <div class="col-md-4 text-muted">Version</div>
                         <div class="col-md-8">@Model.NetworkInfo.Version</div>
-                        <div class="col-md-4">Sub Version</div>
+                        <div class="col-md-4 text-muted">Sub Version</div>
                         <div class="col-md-8">@Model.NetworkInfo.Subversion</div>
-                        <div class="col-md-4">Protocol version</div>
+                        <div class="col-md-4 text-muted">Protocol version</div>
                         <div class="col-md-8">@Model.NetworkInfo.Protocolversion</div>
-                        <div class="col-md-4">Local Services Names</div>
+                        <div class="col-md-4 text-muted">Local Services Names</div>
                         <div class="col-md-8">@(Model.NetworkInfo.Localservicesnames == null ? "" : string.Join(",", Model.NetworkInfo.Localservicesnames))</div>
-                        <div class="col-md-4">Time Offset</div>
+                        <div class="col-md-4 text-muted">Time Offset</div>
                         <div class="col-md-8">@Model.NetworkInfo.Timeoffset</div>
-                        <div class="col-md-4">Relay Fee</div>
-                        <div class="col-md-8">@Model.NetworkInfo.Relayfee</div>
-                        <div class="col-md-4">Incremental Fee</div>
-                        <div class="col-md-8">@Model.NetworkInfo.Incrementalfee</div>
-                        <div class="col-md-4">Local Relay</div>
+                        <div class="col-md-4 text-muted">Relay Fee</div>
+                        <div class="col-md-8">@Model.NetworkInfo.Relayfee.ToString("F8")</div>
+                        <div class="col-md-4 text-muted">Incremental Fee</div>
+                        <div class="col-md-8">@Model.NetworkInfo.Incrementalfee.ToString("F8")</div>
+                        <div class="col-md-4 text-muted">Local Relay</div>
                         <div class="col-md-8">
                             @if (Model.NetworkInfo.Localrelay)
                             {
@@ -42,7 +42,7 @@
                                 <i class="bi bi-x-lg"></i>
                             }
                         </div>
-                        <div class="col-md-4">Network Active</div>
+                        <div class="col-md-4 text-muted">Network Active</div>
                         <div class="col-md-8">
                             @if (Model.NetworkInfo.Networkactive)
                             {
@@ -53,7 +53,7 @@
                                 <i class="bi bi-x-lg"></i>
                             }                            
                         </div>
-                        <div class="col-md-4">Connections</div>
+                        <div class="col-md-4 text-muted">Connections</div>
                         <div class="col-md-8">
                             @if (Model.NetworkInfo.Connections)
                             {
@@ -64,7 +64,7 @@
                                 <i class="bi bi-x-lg"></i>
                             }
                         </div>
-                        <div class="col-md-4">Inbound Connections</div>
+                        <div class="col-md-4 text-muted">Inbound Connections</div>
                         <div class="col-md-8">
                             @if (Model.NetworkInfo.Connections_in)
                             {
@@ -75,7 +75,7 @@
                                 <i class="bi bi-x-lg"></i>
                             }                            
                         </div>
-                        <div class="col-md-4">Outbound Connections</div>
+                        <div class="col-md-4 text-muted">Outbound Connections</div>
                         <div class="col-md-8">
                             @if (Model.NetworkInfo.Connections_out)
                             {
@@ -87,10 +87,10 @@
                             }                            
                         </div>
                         <div class="col-md-12">
-                            <label for="tbl_localaddresses">Local Addresses</label>
+                            <label for="tbl_localaddresses" class="text-muted">Local Addresses</label>
                             @if (Model.NetworkInfo.Localaddresses != null) 
                             {
-                                <table id="tbl_localaddresses">
+                                <table id="tbl_localaddresses" class="table">
                                     <thead>
                                         <tr>
                                             <th>Address</th>
@@ -112,7 +112,7 @@
                             }
                         </div>
                         <div class="col-md-12">
-                            <label for="tbl_network">Networks</label>
+                            <label for="tbl_network" class="text-muted">Networks</label>
                             @if (Model.NetworkInfo.Networks != null) 
                             {
                                 <table id="tbl_network" class="table">
@@ -169,7 +169,7 @@
                                 </table>
                             }
                         </div>
-                        <div class="col-md-4">Warnings</div>
+                        <div class="col-md-4 text-muted">Warnings</div>
                         <div class="col-md-8">@Model.NetworkInfo.Warnings</div>
                     </div>
                 </div>
