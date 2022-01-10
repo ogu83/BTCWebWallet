@@ -14,6 +14,8 @@ public class BitcoinNode : IBitcoinNode, IDisposable
 
     private Process _process;
 
+    private bool _disposed;
+
     public BitcoinNode(
         string exePath,
         string configPath,
@@ -65,11 +67,12 @@ public class BitcoinNode : IBitcoinNode, IDisposable
 
     public void Dispose()
     {
-        if (_process != null)
+        if (!_disposed)
         {
             _process.Kill(true);
             _process.WaitForExit(10000);
             _process.Dispose();
+            _disposed = true;
         }
     }
 
