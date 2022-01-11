@@ -1,6 +1,6 @@
 # BTC Web Wallet
 
-This is a Bitcoin Wallet Web User Interface depending on bitcoin core application and JsonRPC 1.0.
+This is a Bitcoin Wallet Web User Interface depending on bitcoin core application and JsonRPC 1.0. This application can be used as a bitcoin node, hot or cold wallet purposes with a bootstrap powered nice web user interface. So this project is intended to create a good UEX for secure bitcoin cold and hot wallet.
 
 ## Installation
 
