@@ -79,10 +79,10 @@ public class BitcoinNode : IBitcoinNode, IDisposable
     {
         if (!_disposed)
         {
+            _disposed = true;
             _process.Kill(true);
             _process.WaitForExit(10000);
             _process.Dispose();
-            _disposed = true;
         }
     }
 

@@ -1,0 +1,145 @@
+@using BTCWebWallet.RPCClient
+
+@model NetworkInfoResult
+
+<div class="col">
+    @if (Model != null)
+    {
+        <div class="card panel-default">
+            <div class="card-header">Network Status</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-muted">Version</div>
+                    <div class="col-md-8">@Model.Version</div>
+                    <div class="col-md-4 text-muted">Sub Version</div>
+                    <div class="col-md-8">@Model.Subversion</div>
+                    <div class="col-md-4 text-muted">Protocol version</div>
+                    <div class="col-md-8">@Model.Protocolversion</div>
+                    <div class="col-md-4 text-muted">Local Services Names</div>
+                    <div class="col-md-8">@(Model.Localservicesnames == null ? "" : string.Join(",", Model.Localservicesnames))</div>
+                    <div class="col-md-4 text-muted">Time Offset</div>
+                    <div class="col-md-8">@Model.Timeoffset</div>
+                    <div class="col-md-4 text-muted">Relay Fee</div>
+                    <div class="col-md-8">@Model.Relayfee.ToString("F8")</div>
+                    <div class="col-md-4 text-muted">Incremental Fee</div>
+                    <div class="col-md-8">@Model.Incrementalfee.ToString("F8")</div>
+                    <div class="col-md-4 text-muted">Local Relay</div>
+                    <div class="col-md-8">
+                        @if (Model.Localrelay)
+                        {
+                            <i class="bi bi-check-lg"></i>
+                        }
+                        else
+                        {
+                            <i class="bi bi-x-lg"></i>
+                        }
+                    </div>
+                    <div class="col-md-4 text-muted">Network Active</div>
+                    <div class="col-md-8">
+                        @if (Model.Networkactive)
+                        {
+                            <i class="bi bi-check-lg"></i>
+                        }
+                        else 
+                        {
+                            <i class="bi bi-x-lg"></i>
+                        }                            
+                    </div>
+                    <div class="col-md-4 text-muted">Connections</div>
+                    <div class="col-md-8">
+                        @if (Model.Connections)
+                        {
+                            <i class="bi bi-check-lg"></i>
+                        }
+                        else 
+                        {
+                            <i class="bi bi-x-lg"></i>
+                        }
+                    </div>
+                    <div class="col-md-4 text-muted">Inbound Connections</div>
+                    <div class="col-md-8">
+                        @if (Model.Connections_in)
+                        {
+                            <i class="bi bi-check-lg"></i>
+                        }
+                        else 
+                        {
+                            <i class="bi bi-x-lg"></i>
+                        }                            
+                    </div>
+                    <div class="col-md-4 text-muted">Outbound Connections</div>
+                    <div class="col-md-8">
+                        @if (Model.Connections_out)
+                        {
+                            <i class="bi bi-check-lg"></i>
+                        }
+                        else
+                        {
+                            <i class="bi bi-x-lg"></i>
+                        }                            
+                    </div>
+                    <div class="col-md-12">
+                        <label for="tbl_network">Networks</label>
+                        @if (Model.Networks != null) 
+                        {
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Limited</th>
+                                        <th>Reachable</th>
+                                        <th>Proxy</th>
+                                        <th>Proxy Randomize Credentials</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var item in Model.Networks)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>
+                                            @if (item.Limited)
+                                            {
+                                                <i class="bi bi-check-lg"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="bi bi-x-lg"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.Reachable)
+                                            {
+                                                <i class="bi bi-check-lg"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="bi bi-x-lg"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.Proxy
+                                        </td>
+                                        <td>
+                                            @if (item.Proxy_randomize_credentials)
+                                            {
+                                                <i class="bi bi-check-lg"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="bi bi-x-lg"></i>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                    <div class="col-md-4 text-muted">Warnings</div>
+                    <div class="col-md-8">@Model.Warnings</div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

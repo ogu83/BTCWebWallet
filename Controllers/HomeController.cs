@@ -26,7 +26,10 @@ public class HomeController : BaseController
 
     public async Task<IActionResult> Index()
     {
-        var  model = new DashboardViewModel();
+        var  model = new DashboardViewModel 
+        {
+            IsSuccess = true
+        };
 
         var networkInfoResponse = await _rpcClient.GetNetworkInfo(new NetworkInfoRequest(rpc_id));
         if (!networkInfoResponse.HasError) 
@@ -35,6 +38,18 @@ public class HomeController : BaseController
         }
         else 
         {
+            _logger.LogError($"RPC Error {networkInfoResponse.Error}");
+            //TODO: Show RPC Error Some Where maybe a view page for that. Custom RPC Error Page
+        }
+
+        var blockChainInfoResponse = await _rpcClient.GetBlockChainInfo(new BlockChainInfoRequest(rpc_id));
+        if (!blockChainInfoResponse.HasError) 
+        {
+            model.BlockChainInfo = blockChainInfoResponse.Result;
+        }
+        else 
+        {
+            _logger.LogError($"RPC Error {blockChainInfoResponse.Error}");
             //TODO: Show RPC Error Some Where maybe a view page for that. Custom RPC Error Page
         }
         

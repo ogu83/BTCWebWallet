@@ -81,4 +81,11 @@ public class RPCClient : IRPCClient
         var castedResponse = response as CreateWalletResponse;
         return castedResponse;
     }
+
+    public async Task<BlockChainInfoResponse> GetBlockChainInfo(BlockChainInfoRequest request)
+    {
+        var response = await GetResponse<BlockChainInfoResponse>(request);
+        var castedResponse = response as BlockChainInfoResponse;
+        return castedResponse;
+    }
 }

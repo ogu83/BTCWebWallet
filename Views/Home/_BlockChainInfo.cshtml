@@ -1,0 +1,48 @@
+
+@using BTCWebWallet.RPCClient
+@using BTCWebWallet.Helpers
+
+@model BlockChainInfoResult 
+
+<div class="col">
+    @if (Model != null)
+    {
+        <div class="card panel-default">
+            <div class="card-header">Blockchain Status</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-muted">Chain</div>
+                    <div class="col-md-8">@Model.Chain</div>
+                    <div class="col-md-4 text-muted">Blocks</div>
+                    <div class="col-md-8">@Model.Blocks</div>
+                    <div class="col-md-4 text-muted">Headers</div>
+                    <div class="col-md-8">@Model.Headers</div>
+                    <div class="col-md-4 text-muted">Best Block Hash</div>
+                    <div class="col-md-8">@Model.Bestblockhash</div>
+                    <div class="col-md-4 text-muted">Difficulty</div>
+                    <div class="col-md-8">@Model.Difficulty.ToString("F16")</div>
+                    <div class="col-md-4 text-muted">Median Time</div>
+                    <div class="col-md-8">@Model.Mediantime.ToDateTime().ToString()</div>                    
+                    <div class="col-md-4 text-muted">Verification Progress</div>
+                    <div class="col-md-8">@Model.Verificationprogress</div>
+                    <div class="col-md-4 text-muted">Initial Block Download</div>
+                    <div class="col-md-8">
+                        @if (Model.Initialblockdownload)
+                        {
+                            <i class="bi bi-check-lg"></i>
+                        }
+                        else
+                        {
+                            <i class="bi bi-x-lg"></i>
+                        }
+                    </div>
+                    <div class="col-md-4 text-muted">Chain Work</div>
+                    <div class="col-md-8">@Model.Chainwork</div>
+                    
+                    <div class="col-md-4 text-muted">Warnings</div>
+                    <div class="col-md-8">@Model.Warnings</div>                    
+                </div>
+            </div>
+        </div>
+    }
+</div>
