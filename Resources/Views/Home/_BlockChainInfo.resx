@@ -177,4 +177,56 @@
     <value>Warnings</value>
     <comment/>
   </data>
+  <data name="ChainDesc" xml:space="preserve">
+    <value>current network name (main, test, regtest)</value>
+    <comment/>
+  </data>
+  <data name="BlocksDesc" xml:space="preserve">
+    <value>the height of the most-work fully-validated chain. The genesis block has height 0</value>
+    <comment/>
+  </data>
+  <data name="HeadersDesc" xml:space="preserve">
+    <value>the current number of headers we have validated</value>
+    <comment/>
+  </data>
+  <data name="DifficultyDesc" xml:space="preserve">
+    <value>the current difficulty</value>
+    <comment/>
+  </data>
+  <data name="MedianTimeDesc" xml:space="preserve">
+    <value>median time for the current best block</value>
+    <comment/>
+  </data>
+  <data name="VerificationProgressDesc" xml:space="preserve">
+    <value>estimate of verification progress [0..1]</value>
+    <comment/>
+  </data>
+  <data name="InitialBlockDownloadDesc" xml:space="preserve">
+    <value>estimate of whether this node is in Initial Block Download mode</value>
+    <comment/>
+  </data>
+  <data name="SizeOnDiskDesc" xml:space="preserve">
+    <value>the estimated size of the block and undo files on disk</value>
+    <comment/>
+  </data>
+  <data name="PrunedDesc" xml:space="preserve">
+    <value>if the blocks are subject to pruning</value>
+    <comment/>
+  </data>
+  <data name="PruneHeightDesc" xml:space="preserve">
+    <value>lowest-height complete block stored</value>
+    <comment/>
+  </data>
+  <data name="AutomaticPruningDesc" xml:space="preserve">
+    <value>whether automatic pruning is enabled</value>
+    <comment/>
+  </data>
+  <data name="PruneTargetSizeDesc" xml:space="preserve">
+    <value>the target size used by pruning</value>
+    <comment/>
+  </data>
+  <data name="SoftforksDesc" xml:space="preserve">
+    <value>status of softforks</value>
+    <comment/>
+  </data>  
 </root>

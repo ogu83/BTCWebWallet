@@ -162,7 +162,7 @@
     <comment/>
   </data>
   <data name="Possible" xml:space="preserve">
-    <value>Possible</value>
+    <value>returns false if there are not enough blocks left in this period to pass activation threshold</value>
     <comment/>
   </data>
   <data name="Height" xml:space="preserve">
@@ -171,6 +171,54 @@
   </data>
   <data name="Timeout" xml:space="preserve">
     <value>Timeout</value>
+    <comment/>
+  </data>
+  <data name="ForkTypeDesc" xml:space="preserve">
+    <value>one of "buried", "bip9"</value>
+    <comment/>
+  </data>
+  <data name="Bip9StatusDesc" xml:space="preserve">
+    <value>one of "defined", "started", "locked_in", "active", "failed"</value>
+    <comment/>
+  </data>
+  <data name="BitDesc" xml:space="preserve">
+    <value>the bit (0-28) in the block version field used to signal this softfork</value>
+    <comment/>
+  </data>
+  <data name="StartTimeDesc" xml:space="preserve">
+    <value>the minimum median time past of a block at which the bit gains its meaning</value>
+    <comment/>
+  </data>
+  <data name="TimeoutDesc" xml:space="preserve">
+    <value>the median time past of a block at which the deployment is considered failed if not yet locked in</value>
+    <comment/>
+  </data>
+  <data name="SinceDesc" xml:space="preserve">
+    <value>height of the first block to which the status applies</value>
+    <comment/>
+  </data>
+  <data name="PeriodDesc" xml:space="preserve">
+    <value>the length in blocks of the BIP9 signalling period</value>
+    <comment/>
+  </data>
+  <data name="ThresholdDesc" xml:space="preserve">
+    <value>the number of blocks with the version bit set required to activate the feature</value>
+    <comment/>
+  </data>
+  <data name="ElapsedDesc" xml:space="preserve">
+    <value>the number of blocks elapsed since the beginning of the current period</value>
+    <comment/>
+  </data>
+  <data name="CountDesc" xml:space="preserve">
+    <value>the number of blocks with the version bit set in the current period</value>
+    <comment/>
+  </data>
+  <data name="HeightDesc" xml:space="preserve">
+    <value>height of the first block which the rules are or will be enforced</value>
+    <comment/>
+  </data>
+  <data name="ActiveDesc" xml:space="preserve">
+    <value>true if the rules are enforced for the mempool and the next block</value>
     <comment/>
   </data>
 </root>

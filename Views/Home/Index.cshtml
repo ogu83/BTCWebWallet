@@ -10,7 +10,7 @@
 @if (Model != null && Model.IsSuccess) 
 {
     <div class="row">
-        @await Html.PartialAsync("_NetworkInfo", Model.NetworkInfo)
         @await Html.PartialAsync("_BlockChainInfo", Model.BlockChainInfo)
+        @await Html.PartialAsync("_NetworkInfo", Model.NetworkInfo)                
     </div>
 }

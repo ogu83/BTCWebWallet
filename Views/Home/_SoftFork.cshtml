@@ -9,8 +9,11 @@
 @if (Model != null)
 {
     <div class="row">
-        <div class="col-md-4 text-muted">@Localizer["Active"]</div>
-        <div class="col-md-8">
+        <div class="col-md-7 text-muted">
+            @Localizer["Active"]
+            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ActiveDesc"]</div>
+        </div>
+        <div class="col-md-5">
             @if (Model.Active)
             {
                 <i class="bi bi-check-lg"></i>
@@ -20,36 +23,69 @@
                 <i class="bi bi-x-lg"></i>
             }
         </div>     
-        <div class="col-md-4 text-muted">@Localizer["Type"]</div>
-        <div class="col-md-8">@Model.Type</div>
+        <div class="col-md-7 text-muted">
+            @Localizer["Type"]
+            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ForkTypeDesc"]</div>
+        </div>
+        <div class="col-md-5">@Model.Type</div>
         @if (Model.Bip9Visible && Model.Bip9 != null)
         {
-            <div class="col-md-4 text-muted">@Localizer["Status"]</div>
-            <div class="col-md-8">@Model.Bip9.Status</div>
+            <div class="col-md-7 text-muted">
+                @Localizer["Status"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Bip9StatusDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model.Bip9.Status</div>
             @if (Model.Bip9.BitVisible)
             {
-                <div class="col-md-4 text-muted">@Localizer["Bit"]</div>
-                <div class="col-md-8">@Model.Bip9.Bit</div>
+                <div class="col-md-7 text-muted">
+                    @Localizer["Bit"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["BitDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Bip9.Bit</div>
             }
-            <div class="col-md-4 text-muted">@Localizer["StartTime"]</div>
-            <div class="col-md-8">@Model.Bip9.Start_time.ToDateTime().ToString()</div>
-            <div class="col-md-4 text-muted">@Localizer["Timeout"]</div>
-            <div class="col-md-8">@Model.Bip9.Timeout.ToDateTime().ToString()</div>
-            <div class="col-md-4 text-muted">@Localizer["Since"]</div>
-            <div class="col-md-8">@Model.Bip9.Since.ToString()</div>
+            <div class="col-md-7 text-muted">
+                @Localizer["StartTime"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["StartTimeDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model.Bip9.Start_time.ToDateTime().ToString()</div>
+            <div class="col-md-7 text-muted">
+                @Localizer["Timeout"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["TimeoutDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model.Bip9.Timeout.ToDateTime().ToString()</div>
+            <div class="col-md-7 text-muted">
+                @Localizer["Since"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["SinceDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model.Bip9.Since.ToString()</div>
             @if (Model.Bip9.StatisticsVisible && Model.Bip9.Statistics != null) 
             {
                 <div class="col-md-12 h5">@Localizer["Statistics"]</div>
-                <div class="col-md-4 text-muted">@Localizer["Period"]</div>
-                <div class="col-md-8">@Model.Bip9.Statistics.Period</div>
-                <div class="col-md-4 text-muted">@Localizer["Threashold"]</div>
-                <div class="col-md-8">@Model.Bip9.Statistics.Threshold</div>
-                <div class="col-md-4 text-muted">@Localizer["Elapsed"]</div>
-                <div class="col-md-8">@Model.Bip9.Statistics.Elapsed</div>
-                <div class="col-md-4 text-muted">@Localizer["Count"]</div>
-                <div class="col-md-8">@Model.Bip9.Statistics.Count</div>
-                <div class="col-md-4 text-muted">@Localizer["Possible"]</div>
-                <div class="col-md-8">
+                <div class="col-md-7 text-muted">
+                    @Localizer["Period"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["PeriodDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Bip9.Statistics.Period</div>
+                <div class="col-md-7 text-muted">
+                    @Localizer["Threashold"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ThreasholdDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Bip9.Statistics.Threshold</div>
+                <div class="col-md-7 text-muted">
+                    @Localizer["Elapsed"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ElapsedDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Bip9.Statistics.Elapsed</div>
+                <div class="col-md-7 text-muted">
+                    @Localizer["Count"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["CountDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Bip9.Statistics.Count</div>
+                <div class="col-md-7 text-muted">
+                    @Localizer["Possible"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["PossibleDesc"]</div>
+                </div>
+                <div class="col-md-5">
                     @if (Model.Bip9.Statistics.Possible)
                     {
                         <i class="bi bi-check-lg"></i>
@@ -63,8 +99,11 @@
         }
         @if (Model.HeightVisible)
         {
-            <div class="col-md-4 text-muted">@Localizer["Height"]</div>
-            <div class="col-md-8">@Model.Height.AsDiskSizeString()</div>
+            <div class="col-md-7 text-muted">
+                @Localizer["Height"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["HeightDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model.Height.AsDiskSizeString()</div>
         }
     </div>
 }

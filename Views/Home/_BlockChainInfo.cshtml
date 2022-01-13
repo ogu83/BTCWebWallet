@@ -13,22 +13,43 @@
             <div class="card-header">@Localizer["BlockchainStatus"]</div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4 text-muted">@Localizer["Chain"]</div>
-                    <div class="col-md-8">@Model.Chain</div>
-                    <div class="col-md-4 text-muted">@Localizer["Blocks"]</div>
-                    <div class="col-md-8">@Model.Blocks</div>
-                    <div class="col-md-4 text-muted">@Localizer["Headers"]</div>
-                    <div class="col-md-8">@Model.Headers</div>
-                    @* <div class="col-md-4 text-muted">Best Block Hash</div>
-                    <div class="col-md-8">@Model.Bestblockhash</div> *@
-                    <div class="col-md-4 text-muted">@Localizer["Difficulty"]</div>
-                    <div class="col-md-8">@Model.Difficulty.ToString("F16")</div>
-                    <div class="col-md-4 text-muted">@Localizer["MedianTime"]</div>
-                    <div class="col-md-8">@Model.Mediantime.ToDateTime().ToString()</div>                    
-                    <div class="col-md-4 text-muted">@Localizer["VerificationProgress"]</div>
-                    <div class="col-md-8">@Model.Verificationprogress</div>
-                    <div class="col-md-4 text-muted">@Localizer["InitialBlockDownload"]</div>
-                    <div class="col-md-8">
+                    <div class="col-md-7 text-muted">
+                        @Localizer["Chain"]
+                        <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ChainDesc"]</div>
+                    </div>
+                    <div class="col-md-5">@Model.Chain</div>
+                    <div class="col-md-7 text-muted">
+                        @Localizer["Blocks"]
+                        <div class="small"><i class="bi bi-info-circle"></i> @Localizer["BlocksDesc"]</div>
+                    </div>
+                    <div class="col-md-5">@Model.Blocks</div>
+                    <div class="col-md-7 text-muted">
+                        @Localizer["Headers"]
+                        <div class="small"><i class="bi bi-info-circle"></i> @Localizer["HeadersDesc"]</div>
+                    </div>
+                    <div class="col-md-5">@Model.Headers</div>
+                    @* <div class="col-md-7 text-muted">Best Block Hash</div>
+                    <div class="col-md-5">@Model.Bestblockhash</div> *@
+                    <div class="col-md-7 text-muted">
+                        @Localizer["Difficulty"]
+                        <div class="small"><i class="bi bi-info-circle"></i> @Localizer["DifficultyDesc"]</div>
+                    </div>
+                    <div class="col-md-5">@Model.Difficulty.ToString("F16")</div>
+                    <div class="col-md-7 text-muted">
+                        @Localizer["MedianTime"]
+                        <div class="small"><i class="bi bi-info-circle"></i> @Localizer["MedianTimeDesc"]</div>
+                    </div>
+                    <div class="col-md-5">@Model.Mediantime.ToDateTime().ToString()</div>                    
+                    <div class="col-md-7 text-muted">
+                        @Localizer["VerificationProgress"]
+                        <div class="small"><i class="bi bi-info-circle"></i> @Localizer["VerificationProgressDesc"]</div>
+                    </div>
+                    <div class="col-md-5">@Model.Verificationprogress</div>
+                    <div class="col-md-7 text-muted">
+                        @Localizer["InitialBlockDownload"]
+                        <div class="small"><i class="bi bi-info-circle"></i> @Localizer["InitialBlockDownloadDesc"]</div>
+                    </div>
+                    <div class="col-md-5">
                         @if (Model.Initialblockdownload)
                         {
                             <i class="bi bi-check-lg"></i>
@@ -38,12 +59,18 @@
                             <i class="bi bi-x-lg"></i>
                         }
                     </div>
-                    @* <div class="col-md-4 text-muted">Chain Work</div>
-                    <div class="col-md-8">@Model.Chainwork</div> *@
-                    <div class="col-md-4 text-muted">@Localizer["SizeOnDisk"]</div>
-                    <div class="col-md-8">@Model.Size_on_disk.AsDiskSizeString()</div>
-                    <div class="col-md-4 text-muted">@Localizer["Pruned"]</div>
-                    <div class="col-md-8">
+                    @* <div class="col-md-7 text-muted">Chain Work</div>
+                    <div class="col-md-5">@Model.Chainwork</div> *@
+                    <div class="col-md-7 text-muted">
+                        @Localizer["SizeOnDisk"]
+                        <div class="small"><i class="bi bi-info-circle"></i> @Localizer["SizeOnDiskDesc"]</div>
+                    </div>
+                    <div class="col-md-5">@Model.Size_on_disk.AsDiskSizeString()</div>
+                    <div class="col-md-7 text-muted">
+                        @Localizer["Pruned"]
+                        <div class="small"><i class="bi bi-info-circle"></i> @Localizer["PrunedDesc"]</div>
+                    </div>
+                    <div class="col-md-5">
                         @if (Model.Pruned)
                         {
                             <i class="bi bi-check-lg"></i>
@@ -55,10 +82,16 @@
                     </div>
                     @if (Model.Pruned) 
                     {
-                        <div class="col-md-4 text-muted">@Localizer["PruneHeight"]</div>
-                        <div class="col-md-8">@Model.Pruneheight.AsDiskSizeString()</div>
-                        <div class="col-md-4 text-muted">@Localizer["AutomaticPruning"]</div>
-                        <div class="col-md-8">
+                        <div class="col-md-7 text-muted">
+                            @Localizer["PruneHeight"]
+                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["PruneHeightDesc"]</div>
+                        </div>
+                        <div class="col-md-5">@Model.Pruneheight.AsDiskSizeString()</div>
+                        <div class="col-md-7 text-muted">
+                            @Localizer["AutomaticPruning"]
+                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["AutomaticPruningDesc"]</div>
+                        </div>
+                        <div class="col-md-5">
                             @if (Model.Automatic_pruning)
                             {
                                 <i class="bi bi-check-lg"></i>
@@ -68,12 +101,18 @@
                                 <i class="bi bi-x-lg"></i>
                             }
                         </div>
-                        <div class="col-md-4 text-muted">@Localizer["PruneTargetSize"]</div>
-                        <div class="col-md-8">@Model.Prune_target_size.AsDiskSizeString()</div>
+                        <div class="col-md-7 text-muted">
+                            @Localizer["PruneTargetSize"]
+                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["PruneTargetSizeDesc"]</div>
+                        </div>
+                        <div class="col-md-5">@Model.Prune_target_size.AsDiskSizeString()</div>
                     }
                     @if (Model.Softforks != null) 
                     {
-                        <div class="col-md-12 h4">@Localizer["Softforks"]</div>
+                        <div class="col-md-12 h4">
+                            @Localizer["Softforks"]
+                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["SoftforksDesc"]</div>
+                        </div>
                         foreach (var softFork in Model.Softforks)
                         {
                             <div class="col-md-12">
@@ -86,8 +125,10 @@
                             </div>
                         }
                     }                                                       
-                    <div class="col-md-4 text-muted">@Localizer["Warnings"]</div>
-                    <div class="col-md-8">@Model.Warnings</div>                    
+                    <div class="col-md-7 text-muted">
+                        @Localizer["Warnings"]
+                        </div>
+                    <div class="col-md-5">@Model.Warnings</div>                    
                 </div>
             </div>
         </div>
