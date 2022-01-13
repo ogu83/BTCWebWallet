@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BTCWebWallet.Models;
 using BTCWebWallet.RPCClient;
+using Microsoft.Extensions.Localization;
 
 namespace BTCWebWallet.Controllers;
 
@@ -11,17 +12,20 @@ public class HomeController : BaseController
     private readonly IRPCClient _rpcClient;
     private readonly IBitcoinNode _bitcoinNode;
     private readonly IHostApplicationLifetime _appLifeTime;
+    private readonly IStringLocalizer<HomeController> _localizer;
 
     public HomeController(
         ILogger<HomeController> logger,
         IRPCClient rpcClient,
         IBitcoinNode bitcoinNode,
-        IHostApplicationLifetime appLifeTime)
+        IHostApplicationLifetime appLifeTime,
+        IStringLocalizer<HomeController> localizer)
     {
         _logger = logger;
         _rpcClient = rpcClient;
         _bitcoinNode = bitcoinNode;
         _appLifeTime = appLifeTime;
+        _localizer = localizer;
     }
 
     public async Task<IActionResult> Index()

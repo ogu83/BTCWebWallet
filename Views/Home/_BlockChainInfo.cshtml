@@ -1,5 +1,8 @@
+@using Microsoft.AspNetCore.Mvc.Localization
 @using BTCWebWallet.RPCClient
 @using BTCWebWallet.Helpers
+
+@inject IViewLocalizer Localizer
 
 @model BlockChainInfoResult 
 
@@ -7,24 +10,24 @@
     @if (Model != null)
     {
         <div class="card panel-default">
-            <div class="card-header">Blockchain Status</div>
+            <div class="card-header">@Localizer["BlockchainStatus"]</div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4 text-muted">Chain</div>
+                    <div class="col-md-4 text-muted">@Localizer["Chain"]</div>
                     <div class="col-md-8">@Model.Chain</div>
-                    <div class="col-md-4 text-muted">Blocks</div>
+                    <div class="col-md-4 text-muted">@Localizer["Blocks"]</div>
                     <div class="col-md-8">@Model.Blocks</div>
-                    <div class="col-md-4 text-muted">Headers</div>
+                    <div class="col-md-4 text-muted">@Localizer["Headers"]</div>
                     <div class="col-md-8">@Model.Headers</div>
                     @* <div class="col-md-4 text-muted">Best Block Hash</div>
                     <div class="col-md-8">@Model.Bestblockhash</div> *@
-                    <div class="col-md-4 text-muted">Difficulty</div>
+                    <div class="col-md-4 text-muted">@Localizer["Difficulty"]</div>
                     <div class="col-md-8">@Model.Difficulty.ToString("F16")</div>
-                    <div class="col-md-4 text-muted">Median Time</div>
+                    <div class="col-md-4 text-muted">@Localizer["MedianTime"]</div>
                     <div class="col-md-8">@Model.Mediantime.ToDateTime().ToString()</div>                    
-                    <div class="col-md-4 text-muted">Verification Progress</div>
+                    <div class="col-md-4 text-muted">@Localizer["VerificationProgress"]</div>
                     <div class="col-md-8">@Model.Verificationprogress</div>
-                    <div class="col-md-4 text-muted">Initial Block Download</div>
+                    <div class="col-md-4 text-muted">@Localizer["InitialBlockDownload"]</div>
                     <div class="col-md-8">
                         @if (Model.Initialblockdownload)
                         {
@@ -37,9 +40,9 @@
                     </div>
                     @* <div class="col-md-4 text-muted">Chain Work</div>
                     <div class="col-md-8">@Model.Chainwork</div> *@
-                    <div class="col-md-4 text-muted">Size On Disk</div>
+                    <div class="col-md-4 text-muted">@Localizer["SizeOnDisk"]</div>
                     <div class="col-md-8">@Model.Size_on_disk.AsDiskSizeString()</div>
-                    <div class="col-md-4 text-muted">Pruned</div>
+                    <div class="col-md-4 text-muted">@Localizer["Pruned"]</div>
                     <div class="col-md-8">
                         @if (Model.Pruned)
                         {
@@ -52,9 +55,9 @@
                     </div>
                     @if (Model.Pruned) 
                     {
-                        <div class="col-md-4 text-muted">Prune Height</div>
+                        <div class="col-md-4 text-muted">@Localizer["PruneHeight"]</div>
                         <div class="col-md-8">@Model.Pruneheight.AsDiskSizeString()</div>
-                        <div class="col-md-4 text-muted">Automatic Pruning</div>
+                        <div class="col-md-4 text-muted">@Localizer["AutomaticPruning"]</div>
                         <div class="col-md-8">
                             @if (Model.Automatic_pruning)
                             {
@@ -65,12 +68,12 @@
                                 <i class="bi bi-x-lg"></i>
                             }
                         </div>
-                        <div class="col-md-4 text-muted">Prune Target Size</div>
+                        <div class="col-md-4 text-muted">@Localizer["PruneTargetSize"]</div>
                         <div class="col-md-8">@Model.Prune_target_size.AsDiskSizeString()</div>
                     }
                     @if (Model.Softforks != null) 
                     {
-                        <div class="col-md-12 h4">Softforks</div>
+                        <div class="col-md-12 h4">@Localizer["Softforks"]</div>
                         foreach (var softFork in Model.Softforks)
                         {
                             <div class="col-md-12">
@@ -83,7 +86,7 @@
                             </div>
                         }
                     }                                                       
-                    <div class="col-md-4 text-muted">Warnings</div>
+                    <div class="col-md-4 text-muted">@Localizer["Warnings"]</div>
                     <div class="col-md-8">@Model.Warnings</div>                    
                 </div>
             </div>

@@ -1,5 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Dashboard";
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["Dashboard"];
 }
 
 @model DashboardViewModel

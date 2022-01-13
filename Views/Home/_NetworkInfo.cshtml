@@ -1,4 +1,7 @@
+@using Microsoft.AspNetCore.Mvc.Localization
 @using BTCWebWallet.RPCClient
+
+@inject IViewLocalizer Localizer
 
 @model NetworkInfoResult
 
@@ -6,24 +9,24 @@
     @if (Model != null)
     {
         <div class="card panel-default">
-            <div class="card-header">Network Status</div>
+            <div class="card-header">@Localizer["NetworkStatus"]</div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4 text-muted">Version</div>
+                    <div class="col-md-4 text-muted">@Localizer["Version"]</div>
                     <div class="col-md-8">@Model.Version</div>
-                    <div class="col-md-4 text-muted">Sub Version</div>
+                    <div class="col-md-4 text-muted">@Localizer["SubVersion"]</div>
                     <div class="col-md-8">@Model.Subversion</div>
-                    <div class="col-md-4 text-muted">Protocol version</div>
+                    <div class="col-md-4 text-muted">@Localizer["ProtocolVersion"]</div>
                     <div class="col-md-8">@Model.Protocolversion</div>
-                    <div class="col-md-4 text-muted">Local Services Names</div>
+                    <div class="col-md-4 text-muted">@Localizer["LocalServicesNames"]</div>
                     <div class="col-md-8">@(Model.Localservicesnames == null ? "" : string.Join(",", Model.Localservicesnames))</div>
-                    <div class="col-md-4 text-muted">Time Offset</div>
+                    <div class="col-md-4 text-muted">@Localizer["TimeOffset"]</div>
                     <div class="col-md-8">@Model.Timeoffset</div>
-                    <div class="col-md-4 text-muted">Relay Fee</div>
+                    <div class="col-md-4 text-muted">@Localizer["RelayFee"]</div>
                     <div class="col-md-8">@Model.Relayfee.ToString("F8")</div>
-                    <div class="col-md-4 text-muted">Incremental Fee</div>
+                    <div class="col-md-4 text-muted">@Localizer["IncrementalFee"]</div>
                     <div class="col-md-8">@Model.Incrementalfee.ToString("F8")</div>
-                    <div class="col-md-4 text-muted">Local Relay</div>
+                    <div class="col-md-4 text-muted">@Localizer["LocalRelay"]</div>
                     <div class="col-md-8">
                         @if (Model.Localrelay)
                         {
@@ -34,7 +37,7 @@
                             <i class="bi bi-x-lg"></i>
                         }
                     </div>
-                    <div class="col-md-4 text-muted">Network Active</div>
+                    <div class="col-md-4 text-muted">@Localizer["NetworkActive"]</div>
                     <div class="col-md-8">
                         @if (Model.Networkactive)
                         {
@@ -45,7 +48,7 @@
                             <i class="bi bi-x-lg"></i>
                         }                            
                     </div>
-                    <div class="col-md-4 text-muted">Connections</div>
+                    <div class="col-md-4 text-muted">@Localizer["Connections"]</div>
                     <div class="col-md-8">
                         @if (Model.Connections)
                         {
@@ -56,7 +59,7 @@
                             <i class="bi bi-x-lg"></i>
                         }
                     </div>
-                    <div class="col-md-4 text-muted">Inbound Connections</div>
+                    <div class="col-md-4 text-muted">@Localizer["InboundConnections"]</div>
                     <div class="col-md-8">
                         @if (Model.Connections_in)
                         {
@@ -67,7 +70,7 @@
                             <i class="bi bi-x-lg"></i>
                         }                            
                     </div>
-                    <div class="col-md-4 text-muted">Outbound Connections</div>
+                    <div class="col-md-4 text-muted">@Localizer["OutboundConnections"]</div>
                     <div class="col-md-8">
                         @if (Model.Connections_out)
                         {
@@ -79,17 +82,17 @@
                         }                            
                     </div>
                     <div class="col-md-12">
-                        <label for="tbl_network">Networks</label>
+                        <label for="tbl_network">@Localizer["Networks<"]/label>
                         @if (Model.Networks != null) 
                         {
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Limited</th>
-                                        <th>Reachable</th>
-                                        <th>Proxy</th>
-                                        <th>Proxy Randomize Credentials</th>
+                                        <th>@Localizer["Name"]</th>
+                                        <th>@Localizer["Limited"]</th>
+                                        <th>@Localizer["Reachable"]</th>
+                                        <th>@Localizer["Proxy"]</th>
+                                        <th>@Localizer["ProxyRandomizeCredentials"]</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -136,7 +139,7 @@
                             </table>
                         }
                     </div>
-                    <div class="col-md-4 text-muted">Warnings</div>
+                    <div class="col-md-4 text-muted">@Localizer["Warnings"]</div>
                     <div class="col-md-8">@Model.Warnings</div>
                 </div>
             </div>
