@@ -26,4 +26,9 @@ public static class DateTimeExtentions
     {
         return CreateFromUnixTime(value);
     }
+
+    public static DateTime ToDateTime(this long value) 
+    {
+        return CreateFromUnixTime((int)value);
+    }
 }

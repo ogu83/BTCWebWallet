@@ -1,0 +1,67 @@
+@using BTCWebWallet.RPCClient
+@using BTCWebWallet.Helpers
+
+@model SoftFork
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-md-4 text-muted">Active</div>
+        <div class="col-md-8">
+            @if (Model.Active)
+            {
+                <i class="bi bi-check-lg"></i>
+            }
+            else
+            {
+                <i class="bi bi-x-lg"></i>
+            }
+        </div>     
+        <div class="col-md-4 text-muted">Type</div>
+        <div class="col-md-8">@Model.Type</div>
+        @if (Model.Bip9Visible && Model.Bip9 != null)
+        {
+            <div class="col-md-4 text-muted">Status</div>
+            <div class="col-md-8">@Model.Bip9.Status</div>
+            @if (Model.Bip9.BitVisible)
+            {
+                <div class="col-md-4 text-muted">Bit</div>
+                <div class="col-md-8">@Model.Bip9.Bit</div>
+            }
+            <div class="col-md-4 text-muted">Start Time</div>
+            <div class="col-md-8">@Model.Bip9.Start_time.ToDateTime().ToString()</div>
+            <div class="col-md-4 text-muted">Time out</div>
+            <div class="col-md-8">@Model.Bip9.Timeout.ToDateTime().ToString()</div>
+            <div class="col-md-4 text-muted">Since</div>
+            <div class="col-md-8">@Model.Bip9.Since.ToString()</div>
+            @if (Model.Bip9.StatisticsVisible && Model.Bip9.Statistics != null) 
+            {
+                <div class="col-md-12 h5">Statistics</div>
+                <div class="col-md-4 text-muted">Period</div>
+                <div class="col-md-8">@Model.Bip9.Statistics.Period</div>
+                <div class="col-md-4 text-muted">Threashold</div>
+                <div class="col-md-8">@Model.Bip9.Statistics.Threshold</div>
+                <div class="col-md-4 text-muted">Elapsed</div>
+                <div class="col-md-8">@Model.Bip9.Statistics.Elapsed</div>
+                <div class="col-md-4 text-muted">Count</div>
+                <div class="col-md-8">@Model.Bip9.Statistics.Count</div>
+                <div class="col-md-4 text-muted">Initial Block Download</div>
+                <div class="col-md-8">
+                    @if (Model.Bip9.Statistics.Possible)
+                    {
+                        <i class="bi bi-check-lg"></i>
+                    }
+                    else
+                    {
+                        <i class="bi bi-x-lg"></i>
+                    }
+                </div>                
+            }
+        }
+        @if (Model.HeightVisible)
+        {
+            <div class="col-md-4 text-muted">Height</div>
+            <div class="col-md-8">@Model.Height.AsDiskSizeString()</div>
+        }
+    </div>
+}
