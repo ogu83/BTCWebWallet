@@ -121,4 +121,12 @@
     <value>Dashboard</value>
     <comment/>
   </data>
+  <data name="ChainVerified" xml:space="preserve">
+    <value>Chain Verified</value>
+    <comment/>
+  </data>
+  <data name="ChainVerificationFailed" xml:space="preserve">
+    <value>Chain Verification Failed. Please check logs.</value>
+    <comment/>
+  </data>
 </root>

@@ -31,11 +31,16 @@
             $.post(url, model, "json")
                 .done(function(result) { 
                     if (result) {
-                        $("#info_verified").addClass("show");
+                        var html = '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+                        html += '@Localizer["ChainVerified"]';
                     }
                     else {
-                        $("#info_notverified").addClass("show");
+                        var html = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+                        html += '@Localizer["ChainVerificationFailed"]';
                     }
+                    html += '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                    html += '</div>';  
+                    $("#info_verifychain").html(html);
                 });
         }
     </script>
