@@ -29,7 +29,12 @@ public class HomeController : BaseController
     }
 
     public async Task<IActionResult> Index()
-    {
+    {        
+        while(!_bitcoinNode.IsReady())
+        {
+            Thread.Sleep(100);
+        }
+        
         var  model = new DashboardViewModel 
         {
             IsSuccess = true
@@ -80,6 +85,31 @@ public class HomeController : BaseController
     public IActionResult Privacy()
     {
         return View();
+    }
+
+    [HttpPost]    
+    public async Task<IActionResult> VerifyChain(VerifyChainModel model) 
+    {
+        if (model == null) 
+        {
+            throw new ArgumentNullException("VerifyChain, model required");
+        }
+
+        var verifyChainResponse = await _rpcClient.GetVerifyChainInfo(new VerifyChainRequest(rpc_id, model.CheckLevel, model.NBlocks));
+        if (verifyChainResponse != null) 
+        {
+            if (!verifyChainResponse.HasError) 
+            {
+                model.Result = verifyChainResponse.Result != null ? verifyChainResponse.Result.Value : false;
+            }
+            else 
+            {
+                _logger.LogError($"RPC Error {verifyChainResponse.Error}");
+                //TODO: Show RPC Error Some Where maybe a view page for that. Custom RPC Error Page
+            }
+        }
+
+        return new JsonResult(model);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

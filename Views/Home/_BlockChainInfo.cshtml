@@ -44,7 +44,38 @@
                         @Localizer["VerificationProgress"]
                         <div class="small"><i class="bi bi-info-circle"></i> @Localizer["VerificationProgressDesc"]</div>
                     </div>
-                    <div class="col-md-5">@Model.Verificationprogress</div>
+                    <div class="col-md-5">                        
+                        <div class="progress">
+                            <div class="progress-bar" style="width: @(Model.Verificationprogress100)%; role="progressbar" aria-valuenow="@(Model.Verificationprogress100)" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text">@Localizer["CheckLevel"]</span>
+                                <select id="dd_VLevel" class="form-select">                                
+                                    <option value="0">@Localizer["VLevel0"]</option>
+                                    <option value="1">@Localizer["VLevel1"]</option>
+                                    <option value="2">@Localizer["VLevel2"]</option>
+                                    <option value="3" selected>@Localizer["VLevel3"]</option>
+                                    <option value="4">@Localizer["VLevel4"]</option>
+                                </select>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text">@Localizer["NBlocks"]</span>
+                                <input id="txt_nblocks" type="number" class="form-control" value="6" min="0">
+                            </div>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-sm btn-primary" onclick="onVerifyChain();">@Localizer["VerifyChain"]</button>
+                            </div>
+                            <div id="info_verified" class="alert alert-success alert-dismissible fade" role="alert">
+                                @Localizer["ChainVerified"]
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <div id="info_notverified" class="alert alert-danger alert-dismissible fade" role="alert">
+                                @Localizer["ChainVerificationFailed"]
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-7 text-muted">
                         @Localizer["InitialBlockDownload"]
                         <div class="small"><i class="bi bi-info-circle"></i> @Localizer["InitialBlockDownloadDesc"]</div>

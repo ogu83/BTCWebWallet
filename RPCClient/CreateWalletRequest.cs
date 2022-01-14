@@ -79,7 +79,8 @@ public class CreateWalletRequest: RPCRequest
     /// </summary>
     public bool LoadOnStartup { get; set; }
 
-    public override List<object> Params { 
+    public override List<object> Params 
+    { 
         get 
         {
             var retval = new object[] 

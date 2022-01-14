@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
+﻿@using BTCWebWallet.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
 @{
@@ -13,4 +14,29 @@
         @await Html.PartialAsync("_BlockChainInfo", Model.BlockChainInfo)
         @await Html.PartialAsync("_NetworkInfo", Model.NetworkInfo)                
     </div>
+}
+
+@section scripts {
+    <script>
+        function onVerifyChain()
+        {
+            var controllerName = "Home";
+            var actionName = "@nameof(HomeController.VerifyChain)";
+            var url = `/${controllerName}/${actionName}`;
+            var model = {
+                CheckLevel: $("#dd_VLevel").val(),
+                NBlocks: $("#txt_nblocks").val(),
+            };
+
+            $.post(url, model, "json")
+                .done(function(result) { 
+                    if (result) {
+                        $("#info_verified").addClass("show");
+                    }
+                    else {
+                        $("#info_notverified").addClass("show");
+                    }
+                });
+        }
+    </script>
 }

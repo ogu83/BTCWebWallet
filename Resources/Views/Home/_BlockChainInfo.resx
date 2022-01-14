@@ -228,5 +228,45 @@
   <data name="SoftforksDesc" xml:space="preserve">
     <value>status of softforks</value>
     <comment/>
-  </data>  
+  </data>
+  <data name="VLevel0" xml:space="preserve">
+    <value>Level 0: reads the blocks from disk</value>
+    <comment/>
+  </data>
+  <data name="VLevel1" xml:space="preserve">
+    <value>Level 1: verifies block validity</value>
+    <comment/>
+  </data>
+  <data name="VLevel2" xml:space="preserve">
+    <value>Level 2: verifies undo data</value>
+    <comment/>
+  </data>
+  <data name="VLevel3" xml:space="preserve">
+    <value>Level 3: checks disconnection of tip blocks</value>
+    <comment/>
+  </data>
+  <data name="VLevel4" xml:space="preserve">
+    <value>Level 4: tries to reconnect the blocks</value>
+    <comment/>
+  </data>
+  <data name="CheckLevel" xml:space="preserve">
+    <value>Check Level</value>
+    <comment/>
+  </data>
+  <data name="NBlocks" xml:space="preserve">
+    <value>Blocks</value>
+    <comment/>
+  </data>
+  <data name="VerifyChain" xml:space="preserve">
+    <value>Verify Chain</value>
+    <comment/>
+  </data>
+  <data name="ChainVerified" xml:space="preserve">
+    <value>Chain Verified</value>
+    <comment/>
+  </data>
+  <data name="ChainVerificationFailed" xml:space="preserve">
+    <value>Chain Verification Failed. Please check logs.</value>
+    <comment/>
+  </data>
 </root>

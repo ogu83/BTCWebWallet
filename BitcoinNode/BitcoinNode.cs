@@ -16,6 +16,8 @@ public class BitcoinNode : IBitcoinNode, IDisposable
 
     private bool _disposed;
 
+    private bool _isReady;
+
     public BitcoinNode(
         string exePath,
         string configPath,
@@ -63,7 +65,26 @@ public class BitcoinNode : IBitcoinNode, IDisposable
             }
         };
 
-        _process.OutputDataReceived += (sender, data) => Console.WriteLine($"bitcoind: {data.Data}");
+        _process.OutputDataReceived += new DataReceivedEventHandler((sender, data) =>
+        {
+            Console.WriteLine($"bitcoind: {data.Data}");
+
+            if (data == null)
+            {
+                return;                
+            }
+
+            if (data.Data == null)
+            {
+                return;
+            }
+
+            if (data.Data.ToLower().Contains("done loading"))
+            {
+                _isReady = true;
+            }
+        });
+
         _process.ErrorDataReceived += (sender, data) => Console.WriteLine($"bitcoind: {data.Data}");
 
         if (!_process.Start())
@@ -89,5 +110,10 @@ public class BitcoinNode : IBitcoinNode, IDisposable
     public void Terminate()
     {
         Dispose();
+    }
+
+    public bool IsReady() 
+    {
+        return _isReady;    
     }
 }

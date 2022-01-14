@@ -88,4 +88,11 @@ public class RPCClient : IRPCClient
         var castedResponse = response as BlockChainInfoResponse;
         return castedResponse;
     }
+
+    public async Task<VerifyChainResponse> GetVerifyChainInfo(VerifyChainRequest request)
+    {
+        var response = await GetResponse<VerifyChainResponse>(request);
+        var castedResponse = response as VerifyChainResponse;
+        return castedResponse;
+    }
 }

@@ -56,6 +56,14 @@ public class BlockChainInfoResult
     /// </summary>
     public decimal Verificationprogress { get; set; }
 
+    public int Verificationprogress100 
+    { 
+        get 
+        {
+            return (int)(Verificationprogress * 100);
+        }
+    }
+
     /// <summary>
     /// estimate of whether this node is in Initial Block Download mode
     /// </summary>
