@@ -117,24 +117,48 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
-    <comment/>
-  </data>
-  <data name="Privacy" xml:space="preserve">
-    <value>Privacy</value>
-    <comment/>
-  </data>
-  <data name="Shutdown" xml:space="preserve">
-    <value>Shutdown</value>
-    <comment/>
-  </data>
-  <data name="Wallet" xml:space="preserve">
-    <value>Wallet</value>
+  <data name="NoWallet" xml:space="preserve">
+    <value>There is no wallet in this node.</value>
     <comment/>
   </data>
   <data name="Wallets" xml:space="preserve">
     <value>Wallets</value>
+    <comment/>
+  </data>
+  <data name="CreateWallet" xml:space="preserve">
+    <value>Create Wallet</value>
+    <comment/>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+    <comment/>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+    <comment/>
+  </data>
+  <data name="Passphrase" xml:space="preserve">
+    <value>Passphrase</value>
+    <comment/>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Required</value>
+    <comment/>
+  </data>
+  <data name="DisablePrivateKeys" xml:space="preserve">
+    <value>Disable Private Keys</value>
+    <comment/>
+  </data>
+  <data name="AvoidReuse" xml:space="preserve">
+    <value>Avoid Reuse</value>
+    <comment/>
+  </data>
+  <data name="Descriptors" xml:space="preserve">
+    <value>Descriptors</value>
+    <comment/>
+  </data>
+  <data name="LoadOnStartup" xml:space="preserve">
+    <value>Load On Startup</value>
     <comment/>
   </data>
 </root>

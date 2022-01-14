@@ -1,0 +1,69 @@
+@using BTCWebWallet.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["Wallets"];
+}
+
+@model WalletsViewModel
+
+@if (Model != null && Model.IsSuccess) 
+{
+    <div class="row">
+        <div class="col-6">
+            <h4>@Localizer["Wallets"]</h4>
+            @if (Model.ListWallets != null) 
+            {
+                <ul>
+                    @foreach (var item in Model.ListWallets)
+                    {
+                        <li><a class="link-primary" href='@Url.ActionLink("WalletInfo", null, new { name = item })'>@item</a></li>
+                    }
+                </ul>
+            }
+            else 
+            {
+                <p>@Localizer["NoWallet"]</p>
+            }
+        </div>
+        <div class="col-6">
+            <h4>@Localizer["CreateWallet"]</h4>
+            <form asp-action="Create">
+                <label for="Walletname">@Localizer["Name"]</label>
+                <input name="Walletname" class="form-control" type="text" maxlength="16" required />
+                <div class="invalid-feedback">
+                    @Localizer["Required"]
+                </div>
+
+                <label for="Passphrase">@Localizer["Passphrase"]</label>
+                <input name="Passphrase" class="form-control" type="password" maxlength="16" required />
+                <div class="invalid-feedback">
+                    @Localizer["Required"]
+                </div>
+
+                <label for="DisablePrivateKeys">@Localizer["DisablePrivateKeys"]</label>
+                <input name="DisablePrivateKeys" type="checkbox" value="false" />
+                <br />
+
+                <label for="Blank">@Localizer["Blank"]</label>
+                <input name="Blank" type="checkbox" value="false" />
+                <br />
+
+                <label for="AvoidReuse">@Localizer["AvoidReuse"]</label>
+                <input name="AvoidReuse" type="checkbox" value="false" />
+                <br />
+
+                <label for="Descriptors">@Localizer["Descriptors"]</label>
+                <input name="Descriptors" type="checkbox" value="false" />
+                <br />
+
+                <label for="LoadOnStartup">@Localizer["LoadOnStartup"]</label>
+                <input name="LoadOnStartup" type="checkbox" value="true" checked />
+                <br />
+
+                <input type="submit" class="btn btn-primary" value="@Localizer["Create"]" />
+            </form>
+        </div>            
+    </div>
+}
