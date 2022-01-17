@@ -87,6 +87,8 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = supportedCultures;
 });
 
+builder.Services.AddSession(s => s.IdleTimeout = TimeSpan.FromMinutes(30));
+
 var app = builder.Build();
 
 //Configure Resources
@@ -124,6 +126,7 @@ app.UseRouting();
 
 // app.UseAuthentication();
 // app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

@@ -8,12 +8,12 @@
 
 @model WalletsViewModel
 
-@if (Model != null && Model.IsSuccess) 
+@if (Model != null && Model.IsSuccess)
 {
     <div class="row">
-        <div class="col-6">
+        <div class="col-md-6 col-sm-12">
             <h4>@Localizer["Wallets"]</h4>
-            @if (Model.ListWallets != null) 
+            @if (Model.ListWallets != null)
             {
                 <ul>
                     @foreach (var item in Model.ListWallets)
@@ -22,48 +22,77 @@
                     }
                 </ul>
             }
-            else 
+            else
             {
                 <p>@Localizer["NoWallet"]</p>
             }
         </div>
-        <div class="col-6">
+        <div class="col-md-6 col-sm-12">
             <h4>@Localizer["CreateWallet"]</h4>
-            <form asp-action="Create">
-                <label for="Walletname">@Localizer["Name"]</label>
-                <input name="Walletname" class="form-control" type="text" maxlength="16" required />
-                <div class="invalid-feedback">
-                    @Localizer["Required"]
+            <form asp-action="Create" class="row g-3">
+
+                <div class="col-12">
+                    <label for="Walletname" class="form-label">@Localizer["Name"]</label>
+                    <input name="Walletname" class="form-control" type="text" maxlength="16" required />
+                    <div class="invalid-feedback">
+                        @Localizer["Required"]
+                    </div>
                 </div>
 
-                <label for="Passphrase">@Localizer["Passphrase"]</label>
-                <input name="Passphrase" class="form-control" type="password" maxlength="16" required />
-                <div class="invalid-feedback">
-                    @Localizer["Required"]
+                <div class="col-12">
+                    <label for="Passphrase" class="form-label">@Localizer["Passphrase"]</label>
+                    <input id="Passphrase" name="Passphrase" class="form-control" type="password" maxlength="16" required />
+                    <div class="invalid-feedback">
+                        @Localizer["Required"]
+                    </div>
                 </div>
 
-                <label for="DisablePrivateKeys">@Localizer["DisablePrivateKeys"]</label>
-                <input name="DisablePrivateKeys" type="checkbox" value="false" />
-                <br />
+                <div class="col-12">
+                    <label for="Passphrase1" class="form-label">@Localizer["PassphraseAgain"]</label>
+                    <input id="Passphrase1" name="Passphrase1" class="form-control" type="password" maxlength="16"
+                    required />
+                    <div class="invalid-feedback">
+                        @Localizer["Required"]
+                    </div>
+                </div>
 
-                <label for="Blank">@Localizer["Blank"]</label>
-                <input name="Blank" type="checkbox" value="false" />
-                <br />
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" name="DisablePrivateKeys" type="checkbox" value="false" />
+                        <label class="form-check-label" for="DisablePrivateKeys">@Localizer["DisablePrivateKeys"]</label>
+                    </div>
+                </div>
 
-                <label for="AvoidReuse">@Localizer["AvoidReuse"]</label>
-                <input name="AvoidReuse" type="checkbox" value="false" />
-                <br />
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" name="Blank" type="checkbox" value="false" />
+                        <label class="form-check-label" for="Blank">@Localizer["Blank"]</label>
+                    </div>
+                </div>
 
-                <label for="Descriptors">@Localizer["Descriptors"]</label>
-                <input name="Descriptors" type="checkbox" value="false" />
-                <br />
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" name="AvoidReuse" type="checkbox" value="false" />
+                        <label class="form-check-label" for="AvoidReuse">@Localizer["AvoidReuse"]</label>
+                    </div>
+                </div>
 
-                <label for="LoadOnStartup">@Localizer["LoadOnStartup"]</label>
-                <input name="LoadOnStartup" type="checkbox" value="true" checked />
-                <br />
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" name="Descriptors" type="checkbox" value="false" />
+                        <label class="form-check-label" for="Descriptors">@Localizer["Descriptors"]</label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" name="LoadOnStartup" type="checkbox" value="true" checked />
+                        <label class="form-check-label" for="LoadOnStartup">@Localizer["LoadOnStartup"]</label>
+                    </div>
+                </div>
 
                 <input type="submit" class="btn btn-primary" value="@Localizer["Create"]" />
             </form>
-        </div>            
+        </div>
     </div>
 }

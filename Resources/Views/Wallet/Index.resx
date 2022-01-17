@@ -161,4 +161,12 @@
     <value>Load On Startup</value>
     <comment/>
   </data>
+  <data name="PassphraseAgain" xml:space="preserve">
+    <value>Confirm Passphrase</value>
+    <comment/>
+  </data>
+  <data name="PassphraseNotConfirmed" xml:space="preserve">
+    <value>Create Wallet Error: Passphrases should match.</value>
+    <comment/>
+  </data>
 </root>

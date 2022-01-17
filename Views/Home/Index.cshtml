@@ -8,40 +8,39 @@
 
 @model DashboardViewModel
 
-@if (Model != null && Model.IsSuccess) 
+@if (Model != null && Model.IsSuccess)
 {
     <div class="row">
         @await Html.PartialAsync("_BlockChainInfo", Model.BlockChainInfo)
-        @await Html.PartialAsync("_NetworkInfo", Model.NetworkInfo)                
+        @await Html.PartialAsync("_NetworkInfo", Model.NetworkInfo)
     </div>
 }
 
 @section scripts {
-    <script>
-        function onVerifyChain()
-        {
-            var controllerName = "Home";
-            var actionName = "@nameof(HomeController.VerifyChain)";
-            var url = `/${controllerName}/${actionName}`;
-            var model = {
-                CheckLevel: $("#dd_VLevel").val(),
-                NBlocks: $("#txt_nblocks").val(),
-            };
+<script>
+    function onVerifyChain() {
+        var controllerName = "Home";
+        var actionName = "@nameof(HomeController.VerifyChain)";
+        var url = `/${controllerName}/${actionName}`;
+        var model = {
+            CheckLevel: $("#dd_VLevel").val(),
+            NBlocks: $("#txt_nblocks").val(),
+        };
 
-            $.post(url, model, "json")
-                .done(function(result) { 
-                    if (result) {
-                        var html = '<div class="alert alert-success alert-dismissible fade show" role="alert">';
-                        html += '@Localizer["ChainVerified"]';
-                    }
-                    else {
-                        var html = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
-                        html += '@Localizer["ChainVerificationFailed"]';
-                    }
-                    html += '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-                    html += '</div>';  
-                    $("#info_verifychain").html(html);
-                });
-        }
-    </script>
+        $.post(url, model, "json")
+            .done(function (result) {
+                if (result) {
+                    var html = '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+                    html += '@Localizer["ChainVerified"]';
+                }
+                else {
+                    var html = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+                    html += '@Localizer["ChainVerificationFailed"]';
+                }
+                html += '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                html += '</div>';
+                $("#info_verifychain").html(html);
+            });
+    }
+</script>
 }

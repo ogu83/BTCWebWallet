@@ -45,6 +45,13 @@ public class WalletController : BaseController
     [HttpPost]
     public async Task<IActionResult> Create(CreateWalletViewModel model)
     {
+        var validations = model.Validate();
+        if (validations != null && validations.Count > 0) 
+        {   
+            AddPageError(validations);
+            return RedirectToAction(nameof(Index));
+        }
+
         var createWalletResponse = await _rpcClient.GetCreateWallet(new CreateWalletRequest(
             rpc_id, 
             model.Walletname ?? string.Empty, 
