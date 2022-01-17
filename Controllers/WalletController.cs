@@ -12,9 +12,10 @@ public class WalletController : BaseController
     private readonly IStringLocalizer<WalletController> _localizer;
 
     public WalletController(
-        ILogger<HomeController> logger, 
-        IRPCClient rpcClient, 
-        IStringLocalizer<WalletController> localizer)
+        ILogger<HomeController> logger,
+        IRPCClient rpcClient,
+        IStringLocalizer<WalletController> localizer,
+        IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _logger = logger;
         _rpcClient = rpcClient;
@@ -23,20 +24,20 @@ public class WalletController : BaseController
 
     public async Task<IActionResult> Index()
     {
-        var  model = new WalletsViewModel 
+        var model = new WalletsViewModel
         {
             IsSuccess = true
         };
 
         var walletListResponse = await _rpcClient.GetListWallets(new ListWalletsRequest(rpc_id));
-        if (!walletListResponse.HasError) 
+        if (!walletListResponse.HasError)
         {
             model.ListWallets = walletListResponse.Result;
         }
-        else 
+        else
         {
             _logger.LogError($"RPC Error {walletListResponse.Error}");
-            //TODO: Show RPC Error Some Where maybe a view page for that. Custom RPC Error Page
+            AddPageError(RPCErrorToErrorViewModel(walletListResponse.Error));
         }
 
         return View(model);
@@ -46,32 +47,32 @@ public class WalletController : BaseController
     public async Task<IActionResult> Create(CreateWalletViewModel model)
     {
         var validations = model.Validate();
-        if (validations != null && validations.Count > 0) 
-        {   
+        if (validations != null && validations.Count > 0)
+        {
             AddPageError(validations);
             return RedirectToAction(nameof(Index));
         }
 
         var createWalletResponse = await _rpcClient.GetCreateWallet(new CreateWalletRequest(
-            rpc_id, 
-            model.Walletname ?? string.Empty, 
-            model.Passphrase ?? string.Empty, 
-            model.DisablePrivateKeys, 
-            model.Blank, 
-            model.AvoidReuse, 
-            model.Descriptors, 
+            rpc_id,
+            model.Walletname ?? string.Empty,
+            model.Passphrase ?? string.Empty,
+            model.DisablePrivateKeys,
+            model.Blank,
+            model.AvoidReuse,
+            model.Descriptors,
             model.LoadOnStartup));
 
-        if (!createWalletResponse.HasError) 
+        if (!createWalletResponse.HasError)
         {
             model.IsSuccess = true;
-            return RedirectToAction(nameof(Index));
         }
-        else 
+        else
         {
             _logger.LogError($"RPC Error {createWalletResponse.Error}");
-            //TODO: Show RPC Error Some Where maybe a view page for that. Custom RPC Error Page
-            throw new Exception($"RPC Error {createWalletResponse.Error}");
+            AddPageError(RPCErrorToErrorViewModel(createWalletResponse.Error));
         }
+
+        return RedirectToAction(nameof(Index));
     }
 }

@@ -89,6 +89,8 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 
 builder.Services.AddSession(s => s.IdleTimeout = TimeSpan.FromMinutes(30));
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 //Configure Resources

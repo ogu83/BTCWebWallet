@@ -10,14 +10,17 @@ public class BaseController : Controller
 {
     protected readonly string rpc_id = $"BTCWebWallet_{Guid.NewGuid().ToString()}";
 
-    private readonly ISession? session;
+    protected readonly ISession? _session;
+
+    protected readonly IHttpContextAccessor _httpContextAccessor;
 
     public BaseController(IHttpContextAccessor httpContextAccessor)
     {
-        if (httpContextAccessor.HttpContext != null) 
+        _httpContextAccessor = httpContextAccessor;
+        if (_httpContextAccessor.HttpContext != null)
         {
-            this.session = httpContextAccessor.HttpContext.Session;
-        }        
+            _session = _httpContextAccessor.HttpContext?.Session;
+        }
     }
 
     public IActionResult SetCulture(string id = "en")
@@ -44,7 +47,7 @@ public class BaseController : Controller
         );
 
         return LocalRedirect(returnUrl);
-    }   
+    }
 
     protected void SetSession<T>(string key, T obj) where T : class
     {
@@ -55,24 +58,41 @@ public class BaseController : Controller
     protected T? GetSession<T>(string key) where T : class
     {
         var bytes = HttpContext.Session.Get(key);
-        if (bytes != null) 
+        if (bytes != null)
         {
             var json = Encoding.UTF8.GetString(bytes);
             T? obj = JsonConvert.DeserializeObject<T>(json);
             return obj;
         }
-        else 
+        else
         {
             return null;
         }
     }
 
-    public void AddPageError(ErrorViewModel model)
+    protected ErrorViewModel? RPCErrorToErrorViewModel(RPCClient.RPCError? error)
     {
-        
-        var errors = GetSession<List<ErrorViewModel>>("Errors") ?? new List<ErrorViewModel>();
-        errors.Add(model);
-        SetSession<List<ErrorViewModel>>("Errors", errors);
+        if (error == null)
+        {
+            return null;
+        }
+
+        return new ErrorViewModel
+        {
+            Code = error.Code,
+            Message = error.Message,
+            Type = ErrorViewModel.ErrorType.RCPError
+        };
+    }
+
+    public void AddPageError(ErrorViewModel? model)
+    {
+        if (model != null)
+        {
+            var errors = GetSession<List<ErrorViewModel>>("Errors") ?? new List<ErrorViewModel>();
+            errors.Add(model);
+            SetSession<List<ErrorViewModel>>("Errors", errors);
+        }
     }
 
     public void AddPageError(List<ErrorViewModel> model)

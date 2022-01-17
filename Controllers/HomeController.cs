@@ -19,7 +19,8 @@ public class HomeController : BaseController
         IRPCClient rpcClient,
         IBitcoinNode bitcoinNode,
         IHostApplicationLifetime appLifeTime,
-        IStringLocalizer<HomeController> localizer)
+        IStringLocalizer<HomeController> localizer,
+        IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _logger = logger;
         _rpcClient = rpcClient;
@@ -48,7 +49,7 @@ public class HomeController : BaseController
         else 
         {
             _logger.LogError($"RPC Error {networkInfoResponse.Error}");
-            //TODO: Show RPC Error Some Where maybe a view page for that. Custom RPC Error Page
+            AddPageError(RPCErrorToErrorViewModel(networkInfoResponse.Error));
         }
 
         var blockChainInfoResponse = await _rpcClient.GetBlockChainInfo(new BlockChainInfoRequest(rpc_id));
@@ -59,18 +60,8 @@ public class HomeController : BaseController
         else 
         {
             _logger.LogError($"RPC Error {blockChainInfoResponse.Error}");
-            //TODO: Show RPC Error Some Where maybe a view page for that. Custom RPC Error Page
+            AddPageError(RPCErrorToErrorViewModel(blockChainInfoResponse.Error));
         }
-        
-        // _logger.LogInformation()
-        //var newWallet = await _rpcClient.GetCreateWallet(new CreateWalletRequest($"BTCWebWallet_{id}", "testwallet0", "passphrase0"));
-        //var wallets = await _rpcClient.GetListWallets(new ListWalletsRequest($"BTCWebWallet_{id}"));
-                           
-        // Console.WriteLine("New Wallet");
-        // Console.WriteLine(newWallet.ToString());
-        
-        // Console.WriteLine("Wallets");
-        // Console.WriteLine(wallets);
         
         return View(model);
     }
@@ -105,7 +96,7 @@ public class HomeController : BaseController
             else 
             {
                 _logger.LogError($"RPC Error {verifyChainResponse.Error}");
-                //TODO: Show RPC Error Some Where maybe a view page for that. Custom RPC Error Page
+                AddPageError(RPCErrorToErrorViewModel(verifyChainResponse.Error));
             }
         }
 
