@@ -1,3 +1,6 @@
+using BTCWebWallet.Helpers;
+using Newtonsoft.Json;
+
 namespace BTCWebWallet.RPCClient;
 
 public class WalletInfoResult
@@ -65,6 +68,7 @@ public class WalletInfoResult
     /// <summary>
     /// current scanning details, or false if no scan is in progress
     /// </summary>
+    [JsonConverter(typeof(BoolObjectConverter))]
     public Scanning? Scanning { get; set; }
 
     /// <summary>

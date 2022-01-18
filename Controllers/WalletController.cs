@@ -43,6 +43,35 @@ public class WalletController : BaseController
         return View(model);
     }
 
+    public async Task<IActionResult> Info(string name)
+    {
+        var model = new WalletViewModel
+        {
+            IsSuccess = true
+        };
+
+        var walletResponse = await _rpcClient.GetWalletInfo(new WalletInfoRequest(rpc_id, name));
+        
+        if (!walletResponse.HasError)
+        {
+            model.IsSuccess = true;
+            model.WalletInfo = walletResponse.Result;
+        }
+        else
+        {
+            _logger.LogError($"RPC Error {walletResponse.Error}");
+            AddPageError(RPCErrorToErrorViewModel(walletResponse.Error));
+        }
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Unlock(string name, string passphrase)
+    {
+        throw new NotImplementedException("Unlock wallet will be implemented.");
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create(CreateWalletViewModel model)
     {

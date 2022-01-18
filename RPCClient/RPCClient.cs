@@ -61,6 +61,31 @@ public class RPCClient : IRPCClient
         }        
     }
 
+    private async Task<T> GetWalletResponse<T>(RPCWalletRequest request) where T : RPCSerializable
+    {
+        using (var c = client()) 
+        {
+            var requestStr = request.ToString();
+            var requestStrContent = new StringContent(requestStr);
+            var wallet_uri = $"{uri()}wallet/{request.WalletName}";
+            var response = await c.PostAsync(wallet_uri, requestStrContent);
+            var strResult = await response.Content.ReadAsStringAsync();
+            try
+            {
+                var result = JsonConvert.DeserializeObject<T>(strResult);
+                if (result == null)
+                {
+                    throw new ArgumentNullException("RPCClient Response Can't be null");
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new RPCSerializeException(strResult, typeof(T).ToString(), ex);                                   
+            }                                    
+        }        
+    }
+
     public async Task<NetworkInfoResponse> GetNetworkInfo(NetworkInfoRequest request)
     {   
         var response = await GetResponse<NetworkInfoResponse>(request);
@@ -93,6 +118,13 @@ public class RPCClient : IRPCClient
     {
         var response = await GetResponse<VerifyChainResponse>(request);
         var castedResponse = response as VerifyChainResponse;
+        return castedResponse;
+    }
+
+    public async Task<WalletInfoResponse> GetWalletInfo(WalletInfoRequest request)
+    {
+        var response = await GetWalletResponse<WalletInfoResponse>(request);
+        var castedResponse = response as WalletInfoResponse;
         return castedResponse;
     }
 }

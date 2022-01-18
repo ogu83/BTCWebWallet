@@ -18,7 +18,7 @@
                 <ul>
                     @foreach (var item in Model.ListWallets)
                     {
-                        <li><a class="link-primary" href='@Url.ActionLink("WalletInfo", null, new { name = item })'>@item</a></li>
+                        <li><a class="link-primary" href='@Url.ActionLink("Info", null, new { name = item })'>@item</a></li>
                     }
                 </ul>
             }
