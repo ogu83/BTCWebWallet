@@ -24,21 +24,20 @@
                                 @Localizer["Unlocked_until"]
                                 <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Unlocked_untilDesc"]</div>
                             </div>
-                            <div class="col-md-5">@Model.WalletInfo?.Unlocked_until</div>
+                            <div class="col-md-5">@Model.WalletInfo?.Unlocked_until.ToDateTime().ToLocalTime().ToString()</div>
                         }
                         else
                         {
                             <div class="col-12">
-                                <form asp-action="@(nameof(WalletController.Unlock))" class="row g-3">
+                                <div class="row g-3">
                                     <div class="col-auto">
-                                        <input id="name" type="hidden" value="@Model.WalletInfo?.Walletname">
                                         <label for="passphrase" class="visually-hidden">@Localizer["Passphrase"]</label>
-                                        <input type="password" class="form-control" id="passphrase" placeholder="@Localizer["Passphrase"]">
+                                        <input id="passphrase" type="password" class="form-control" placeholder="@Localizer["Passphrase"]" required >
                                     </div>
                                     <div class="col-auto">
-                                        <button type="submit" class="btn btn-primary mb-3"><i class="bi bi-unlock"></i> @Localizer["Unlock"]</button>
+                                        <button onclick="Unlock();" type="button" class="btn btn-primary mb-3"><i class="bi bi-unlock"></i> @Localizer["Unlock"]</button>
                                     </div>
-                                </form>
+                                </div>
                                 @* <a class="btn btn-primary" asp-area="" asp-controller="Wallet" asp-action="Unlock"
                                     asp-route-name="@Model.WalletInfo?.Walletname">
                                     <i class="bi bi-unlock"></i> @Localizer["Unlock"]
@@ -68,7 +67,7 @@
                             @Localizer["Keypoololdest"]
                             <div class="small"><i class="bi bi-info-circle"></i> @Localizer["KeypoololdestDesc"]</div>
                         </div>
-                        <div class="col-md-5">@Model.WalletInfo?.Keypoololdest.ToDateTime().ToString()</div>
+                        <div class="col-md-5">@Model.WalletInfo?.Keypoololdest.ToDateTime().ToLocalTime().ToString()</div>
 
                         <div class="col-md-7 text-muted">
                             @Localizer["Keypoolsize"]
@@ -176,4 +175,27 @@
             </div>
         </div>
     </div>
+}
+
+@section scripts {
+<script>
+    function Unlock() 
+    {
+        var passphrase = $("#passphrase").val();
+        var name = "@Model?.WalletInfo?.Walletname";
+
+        var controllerName = "Wallet";
+        var actionName = "@nameof(WalletController.Unlock)";
+        var url = `/${controllerName}/${actionName}`;
+        var model = {
+            passphrase: passphrase,
+            name: name,
+        };
+
+        $.post(url, model, "json")
+            .done(function (result) {
+                window.location.reload();
+            });
+    }
+</script>
 }

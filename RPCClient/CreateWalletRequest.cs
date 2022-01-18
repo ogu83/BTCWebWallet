@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace BTCWebWallet.RPCClient;
 
 public class CreateWalletRequest: RPCRequest
@@ -47,36 +49,43 @@ public class CreateWalletRequest: RPCRequest
     /// <summary>
     /// The name for the new wallet. If this is a path, the wallet will be created at the path location.
     /// </summary>
+    [JsonIgnore]
     public string WalletName { get; set; }
 
     /// <summary>
     /// Encrypt the wallet with this passphrase.
     /// </summary>
+    [JsonIgnore]
     public string Passphrase { get; set; }
 
     /// <summary>
     /// Disable the possibility of private keys (only watchonlys are possible in this mode).
     /// </summary>
+    [JsonIgnore]
     public bool DisablePrivateKeys { get; set; }
 
     /// <summary>
     /// Create a blank wallet. A blank wallet has no keys or HD seed. One can be set using sethdseed.
     /// </summary>
+    [JsonIgnore]
     public bool Blank { get; set; }
 
     /// <summary>
     /// Keep track of coin reuse, and treat dirty and clean coins differently with privacy considerations in mind.
     /// </summary>
+    [JsonIgnore]
     public bool AvoidReuse { get;  set; }
 
     /// <summary>
     /// Create a native descriptor wallet. The wallet will use descriptors internally to handle address creation
     /// </summary>
+    [JsonIgnore]
     public bool Descriptors { get; set; }
 
     /// <summary>
     /// Save wallet name to persistent settings and load on startup. True to add wallet to startup list, false to remove, null to leave unchanged.
     /// </summary>
+    [JsonIgnore]
     public bool LoadOnStartup { get; set; }
 
     public override List<object> Params 

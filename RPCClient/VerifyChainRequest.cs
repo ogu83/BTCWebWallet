@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace BTCWebWallet.RPCClient;
 
 public class VerifyChainRequest : RPCRequest
@@ -26,11 +28,13 @@ public class VerifyChainRequest : RPCRequest
     /// level 4 tries to reconnect the blocks
     /// each level includes the checks of the previous levels
     /// </summary>
+    [JsonIgnore]
     public int CheckLevel { get; set; }
     
     /// <summary>
     /// optional, default=6, 0=all
     /// </summary>
+    [JsonIgnore]
     public int NBlocks { get; set; }
 
     public override List<object> Params 

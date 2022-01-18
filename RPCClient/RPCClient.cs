@@ -127,4 +127,11 @@ public class RPCClient : IRPCClient
         var castedResponse = response as WalletInfoResponse;
         return castedResponse;
     }
+
+    public async Task<RPCResponse> GetWalletPassphrase(PassphraseRequest request)
+    {
+        var response = await GetWalletResponse<RPCResponse>(request);
+        var castedResponse = response as RPCResponse;
+        return castedResponse;
+    }
 }

@@ -8,4 +8,5 @@ public interface IRPCClient
     Task<CreateWalletResponse> GetCreateWallet(CreateWalletRequest request);   
     Task<VerifyChainResponse> GetVerifyChainInfo(VerifyChainRequest request);
     Task<WalletInfoResponse> GetWalletInfo(WalletInfoRequest request);
+    Task<RPCResponse> GetWalletPassphrase(PassphraseRequest request);
 }

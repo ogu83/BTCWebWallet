@@ -3,6 +3,7 @@
 // using BTCWebWallet.Data;
 // using System.IO;
 using System.Globalization;
+using BTCWebWallet.Helpers;
 using BTCWebWallet.RPCClient;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;

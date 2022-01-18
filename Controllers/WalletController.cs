@@ -2,24 +2,29 @@ using Microsoft.AspNetCore.Mvc;
 using BTCWebWallet.Models;
 using BTCWebWallet.RPCClient;
 using Microsoft.Extensions.Localization;
+using BTCWebWallet.Helpers;
 
 namespace BTCWebWallet.Controllers;
 
 public class WalletController : BaseController
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<WalletController> _logger;
     private readonly IRPCClient _rpcClient;
     private readonly IStringLocalizer<WalletController> _localizer;
 
+    private readonly IConfiguration _configuration;
+
     public WalletController(
-        ILogger<HomeController> logger,
+        ILogger<WalletController> logger,
         IRPCClient rpcClient,
         IStringLocalizer<WalletController> localizer,
-        IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+        IHttpContextAccessor httpContextAccessor,
+        IConfiguration configuration) : base(httpContextAccessor)
     {
         _logger = logger;
         _rpcClient = rpcClient;
         _localizer = localizer;
+        _configuration = configuration;
     }
 
     public async Task<IActionResult> Index()
@@ -51,7 +56,7 @@ public class WalletController : BaseController
         };
 
         var walletResponse = await _rpcClient.GetWalletInfo(new WalletInfoRequest(rpc_id, name));
-        
+
         if (!walletResponse.HasError)
         {
             model.IsSuccess = true;
@@ -69,7 +74,24 @@ public class WalletController : BaseController
     [HttpPost]
     public async Task<IActionResult> Unlock(string name, string passphrase)
     {
-        throw new NotImplementedException("Unlock wallet will be implemented.");
+        var timeout = 600;
+        try
+        {
+            timeout = int.Parse(_configuration.GetSection("WalletSettings").GetSection("UnlockTimeout").Value);
+        }
+        catch
+        {
+
+        }
+
+        var response = await _rpcClient.GetWalletPassphrase(new PassphraseRequest(rpc_id, name, passphrase, timeout));
+        if (response.HasError)
+        {
+            _logger.LogError($"RPC Error {response.Error}");
+            AddPageError(RPCErrorToErrorViewModel(response.Error));
+        }
+
+        return Json(true);
     }
 
     [HttpPost]
