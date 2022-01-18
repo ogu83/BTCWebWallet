@@ -47,12 +47,12 @@
                 @Localizer["StartTime"]
                 <div class="small"><i class="bi bi-info-circle"></i> @Localizer["StartTimeDesc"]</div>
             </div>
-            <div class="col-md-5">@Model.Bip9.Start_time.ToDateTime().ToString()</div>
+            <div class="col-md-5">@Model.Bip9.Start_time.ToDateTime().ToLocalTime().ToString()</div>
             <div class="col-md-7 text-muted">
                 @Localizer["Timeout"]
                 <div class="small"><i class="bi bi-info-circle"></i> @Localizer["TimeoutDesc"]</div>
             </div>
-            <div class="col-md-5">@Model.Bip9.Timeout.ToDateTime().ToString()</div>
+            <div class="col-md-5">@Model.Bip9.Timeout.ToDateTime().ToLocalTime().ToString()</div>
             <div class="col-md-7 text-muted">
                 @Localizer["Since"]
                 <div class="small"><i class="bi bi-info-circle"></i> @Localizer["SinceDesc"]</div>

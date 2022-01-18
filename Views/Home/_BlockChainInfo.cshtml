@@ -39,7 +39,7 @@
                         @Localizer["MedianTime"]
                         <div class="small"><i class="bi bi-info-circle"></i> @Localizer["MedianTimeDesc"]</div>
                     </div>
-                    <div class="col-md-5">@Model.Mediantime.ToDateTime().ToString()</div>                    
+                    <div class="col-md-5">@Model.Mediantime.ToDateTime().ToLocalTime().ToString()</div>                    
                     <div class="col-md-7 text-muted">
                         @Localizer["VerificationProgress"]
                         <div class="small"><i class="bi bi-info-circle"></i> @Localizer["VerificationProgressDesc"]</div>
