@@ -165,8 +165,32 @@
     <value>Confirm Passphrase</value>
     <comment/>
   </data>
-  <data name="PassphraseNotConfirmed" xml:space="preserve">
-    <value>Create Wallet Error: Passphrases should match.</value>
+  <data name="WalletNameDesc" xml:space="preserve">
+    <value>The name for the new wallet</value>
+    <comment/>
+  </data>
+  <data name="DisablePrivateKeysDesc" xml:space="preserve">
+    <value>Disable the possibility of private keys (only watchonlys are possible in this mode)</value>
+    <comment/>
+  </data>
+  <data name="BlankDesc" xml:space="preserve">
+    <value>Create a blank wallet. A blank wallet has no keys or HD seed. One can be set using sethdseed</value>
+    <comment/>
+  </data>
+  <data name="PassphraseDesc" xml:space="preserve">
+    <value>Encrypt the wallet with this passphrase</value>
+    <comment/>
+  </data>
+  <data name="AvoidReuseDesc" xml:space="preserve">
+    <value>Keep track of coin reuse, and treat dirty and clean coins differently with privacy considerations in mind</value>
+    <comment/>
+  </data>
+  <data name="DescriptorsDesc" xml:space="preserve">
+    <value>Create a native descriptor wallet. The wallet will use descriptors internally to handle address creation</value>
+    <comment/>
+  </data>
+  <data name="LoadOnStartupDesc" xml:space="preserve">
+    <value>Save wallet name to persistent settings and load on startup. True to add wallet to startup list, false to remove, null to leave unchanged</value>
     <comment/>
   </data>
 </root>

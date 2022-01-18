@@ -34,6 +34,7 @@
                 <div class="col-12">
                     <label for="Walletname" class="form-label">@Localizer["Name"]</label>
                     <input name="Walletname" class="form-control" type="text" maxlength="16" required />
+                    <small><i class="bi bi-info-circle"></i> @Localizer["WalletNameDesc"]</small>
                     <div class="invalid-feedback">
                         @Localizer["Required"]
                     </div>
@@ -42,6 +43,7 @@
                 <div class="col-12">
                     <label for="Passphrase" class="form-label">@Localizer["Passphrase"]</label>
                     <input id="Passphrase" name="Passphrase" class="form-control" type="password" maxlength="16" required />
+                    <small><i class="bi bi-info-circle"></i> @Localizer["PassphraseDesc"]</small>
                     <div class="invalid-feedback">
                         @Localizer["Required"]
                     </div>
@@ -61,6 +63,7 @@
                         <input class="form-check-input" name="DisablePrivateKeys" type="checkbox" value="false" />
                         <label class="form-check-label" for="DisablePrivateKeys">@Localizer["DisablePrivateKeys"]</label>
                     </div>
+                    <small><i class="bi bi-info-circle"></i> @Localizer["DisablePrivateKeysDesc"]</small>
                 </div>
 
                 <div class="col-12">
@@ -68,6 +71,7 @@
                         <input class="form-check-input" name="Blank" type="checkbox" value="false" />
                         <label class="form-check-label" for="Blank">@Localizer["Blank"]</label>
                     </div>
+                    <small><i class="bi bi-info-circle"></i> @Localizer["BlankDesc"]</small>
                 </div>
 
                 <div class="col-12">
@@ -75,6 +79,7 @@
                         <input class="form-check-input" name="AvoidReuse" type="checkbox" value="false" />
                         <label class="form-check-label" for="AvoidReuse">@Localizer["AvoidReuse"]</label>
                     </div>
+                    <small><i class="bi bi-info-circle"></i> @Localizer["AvoidReuseDesc"]</small>
                 </div>
 
                 <div class="col-12">
@@ -82,6 +87,7 @@
                         <input class="form-check-input" name="Descriptors" type="checkbox" value="false" />
                         <label class="form-check-label" for="Descriptors">@Localizer["Descriptors"]</label>
                     </div>
+                    <small><i class="bi bi-info-circle"></i> @Localizer["DescriptorsDesc"]</small>
                 </div>
 
                 <div class="col-12">
@@ -89,6 +95,7 @@
                         <input class="form-check-input" name="LoadOnStartup" type="checkbox" value="true" checked />
                         <label class="form-check-label" for="LoadOnStartup">@Localizer["LoadOnStartup"]</label>
                     </div>
+                    <small><i class="bi bi-info-circle"></i> @Localizer["LoadOnStartupDesc"]</small>
                 </div>
 
                 <input type="submit" class="btn btn-primary" value="@Localizer["Create"]" />
