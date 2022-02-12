@@ -5,3 +5,8 @@
 /test_wallet
 /test_data
 /.DS_Store
+.DS_Store
+**.DS_Store
+*/.DS_Store/
+wwwroot/lib/bootstrap/dist/css/.DS_Store
+wwwroot/lib/bootstrap/dist/.DS_Store
