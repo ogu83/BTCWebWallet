@@ -11,9 +11,8 @@ public class WalletController : BaseController
     private readonly ILogger<WalletController> _logger;
     private readonly IRPCClient _rpcClient;
     private readonly IStringLocalizer<WalletController> _localizer;
-
     private readonly IConfiguration _configuration;
-
+    
     public WalletController(
         ILogger<WalletController> logger,
         IRPCClient rpcClient,
@@ -56,7 +55,6 @@ public class WalletController : BaseController
         };
 
         var walletResponse = await _rpcClient.GetWalletInfo(new WalletInfoRequest(rpc_id, name));
-
         if (!walletResponse.HasError)
         {
             model.IsSuccess = true;
@@ -66,6 +64,18 @@ public class WalletController : BaseController
         {
             _logger.LogError($"RPC Error {walletResponse.Error}");
             AddPageError(RPCErrorToErrorViewModel(walletResponse.Error));
+        }
+
+        var balancesResponse = await _rpcClient.GetBalances(new BalancesRequest(rpc_id, name));
+        if (!balancesResponse.HasError)
+        {
+            model.IsSuccess = model.IsSuccess && true;
+            model.Balances = balancesResponse.Result;
+        }
+        else
+        {
+            _logger.LogError($"RPC Error {balancesResponse.Error}");
+            AddPageError(RPCErrorToErrorViewModel(balancesResponse.Error));
         }
 
         return View(model);

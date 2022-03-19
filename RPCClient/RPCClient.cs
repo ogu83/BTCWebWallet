@@ -134,4 +134,11 @@ public class RPCClient : IRPCClient
         var castedResponse = response as RPCResponse;
         return castedResponse;
     }
+
+    public async Task<BalancesResponse> GetBalances(BalancesRequest request)
+    {
+        var response = await GetWalletResponse<BalancesResponse>(request);
+        var castedResponse = response as BalancesResponse;
+        return castedResponse;
+    }
 }

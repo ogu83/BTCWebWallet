@@ -117,8 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Balance" xml:space="preserve">
+    <value>Balance</value>
+    <comment/>
+  </data>
+  <data name="Balances" xml:space="preserve">
+    <value>Balances</value>
+    <comment/>
+  </data>
   <data name="Wallet" xml:space="preserve">
     <value>Wallet</value>
+    <comment/>
+  </data>
+  <data name="Unlocked_until" xml:space="preserve">
+    <value>Unlocked Until</value>
+    <comment/>
+  </data>
+  <data name="Unlocked_untilDesc" xml:space="preserve">
+    <value>the UNIX epoch time until which the wallet is unlocked for transfers, or 0 if the wallet is locked (only present for passphrase-encrypted wallets)</value>
+    <comment/>
+  </data>
+  <data name="Passphrase" xml:space="preserve">
+    <value>Passphrase</value>
+    <comment/>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
     <comment/>
   </data>
   <data name="Version" xml:space="preserve">
@@ -138,7 +162,7 @@
     <comment/>
   </data>
   <data name="Txcount" xml:space="preserve">
-    <value>Tx Count</value>
+    <value>Transaction Count</value>
     <comment/>
   </data>
   <data name="TxcountDesc" xml:space="preserve">
@@ -146,15 +170,15 @@
     <comment/>
   </data>
   <data name="Keypoololdest" xml:space="preserve">
-    <value>Keypool Oldest</value>
+    <value>Keypoololdest</value>
     <comment/>
   </data>
   <data name="KeypoololdestDesc" xml:space="preserve">
-    <value>the UNIX epoch time of the oldest pre-generated key in the key pool. Legacy wallets only.</value>
+    <value> the UNIX epoch time of the oldest pre-generated key in the key pool. Legacy wallets only.</value>
     <comment/>
   </data>
   <data name="Keypoolsize" xml:space="preserve">
-    <value>Keypool Size</value>
+    <value>Key Pool Size</value>
     <comment/>
   </data>
   <data name="KeypoolsizeDesc" xml:space="preserve">
@@ -162,23 +186,11 @@
     <comment/>
   </data>
   <data name="Keypoolsize_hd_internal" xml:space="preserve">
-    <value>Keypool Size HD Internal</value>
+    <value>Key Pool Size Hd Internal</value>
     <comment/>
   </data>
   <data name="Keypoolsize_hd_internalDesc" xml:space="preserve">
     <value>how many new keys are pre-generated for internal use (used for change outputs, only appears if the wallet is using this feature, otherwise external keys are used)</value>
-    <comment/>
-  </data>
-  <data name="Unlocked_until" xml:space="preserve">
-    <value>Unlocked Until</value>
-    <comment/>
-  </data>
-  <data name="Unlocked_untilDesc" xml:space="preserve">
-    <value>the UNIX epoch time until which the wallet is unlocked for transfers, or 0 if the wallet is locked (only present for passphrase-encrypted wallets)</value>
-    <comment/>
-  </data>
-  <data name="Unlock" xml:space="preserve">
-    <value>Unlock</value>
     <comment/>
   </data>
   <data name="Paytxfee" xml:space="preserve">
@@ -190,7 +202,7 @@
     <comment/>
   </data>
   <data name="Hdseedid" xml:space="preserve">
-    <value>HD Seed ID</value>
+    <value>Hd Seed Id</value>
     <comment/>
   </data>
   <data name="HdseedidDesc" xml:space="preserve">
@@ -201,10 +213,6 @@
     <value>Private Keys Enabled</value>
     <comment/>
   </data>
-  <data name="Private_keys_enabledDesc" xml:space="preserve">
-    <value>false if privatekeys are disabled for this wallet (enforced watch-only wallet)</value>
-    <comment/>
-  </data>
   <data name="Avoid_reuse" xml:space="preserve">
     <value>Avoid Reuse</value>
     <comment/>
@@ -213,12 +221,12 @@
     <value>whether this wallet tracks clean/dirty coins in terms of reuse</value>
     <comment/>
   </data>
-  <data name="Duration" xml:space="preserve">
-    <value>Duration</value>
-    <comment/>
-  </data>
   <data name="DurationDesc" xml:space="preserve">
     <value>elapsed seconds since scan start</value>
+    <comment/>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
     <comment/>
   </data>
   <data name="Progress" xml:space="preserve">
@@ -237,8 +245,52 @@
     <value>whether this wallet uses descriptors for scriptPubKey management</value>
     <comment/>
   </data>
-  <data name="Passphrase" xml:space="preserve">
-    <value>Passphrase</value>
+  <data name="Used" xml:space="preserve">
+    <value>Used</value>
+    <comment/>
+  </data>
+  <data name="UsedDesc" xml:space="preserve">
+    <value>(only present if avoid_reuse is set) balance from coins sent to addresses that were previously spent from (potentially privacy violating)</value>
+    <comment/>
+  </data>
+  <data name="ImmatureDesc" xml:space="preserve">
+    <value>balance from immature coinbase outputs</value>
+    <comment/>
+  </data>
+  <data name="Immarute" xml:space="preserve">
+    <value>Immarute</value>
+    <comment/>
+  </data>
+  <data name="Untrusted_pending" xml:space="preserve">
+    <value>Untrusted_pending</value>
+    <comment/>
+  </data>
+  <data name="Untrusted_pendingDesc" xml:space="preserve">
+    <value>untrusted pending balance (outputs created by others that are in the mempool)</value>
+    <comment/>
+  </data>
+  <data name="Trusted" xml:space="preserve">
+    <value>Trusted</value>
+    <comment/>
+  </data>
+  <data name="TrustedDesc" xml:space="preserve">
+    <value>trusted balance (outputs created by the wallet or confirmed outputs)</value>
+    <comment/>
+  </data>
+  <data name="Mine" xml:space="preserve">
+    <value>Mine</value>
+    <comment/>
+  </data>
+  <data name="MineDesc" xml:space="preserve">
+    <value>balances from outputs that the wallet can sign</value>
+    <comment/>
+  </data>
+  <data name="Watchonly" xml:space="preserve">
+    <value>Watchonly</value>
+    <comment/>
+  </data>
+  <data name="WatchonlyDesc" xml:space="preserve">
+    <value>watchonly balances (not present if wallet does not watch anything)</value>
     <comment/>
   </data>
 </root>

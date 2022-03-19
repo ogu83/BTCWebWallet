@@ -32,16 +32,18 @@
                                 <div class="row g-3">
                                     <div class="col-auto">
                                         <label for="passphrase" class="visually-hidden">@Localizer["Passphrase"]</label>
-                                        <input id="passphrase" type="password" class="form-control" placeholder="@Localizer["Passphrase"]" required >
+                                        <input id="passphrase" type="password" class="form-control"
+                                    placeholder="@Localizer["Passphrase"]" required>
                                     </div>
                                     <div class="col-auto">
-                                        <button onclick="Unlock();" type="button" class="btn btn-primary mb-3"><i class="bi bi-unlock"></i> @Localizer["Unlock"]</button>
+                                        <button onclick="Unlock();" type="button" class="btn btn-primary mb-3"><i
+                                        class="bi bi-unlock"></i> @Localizer["Unlock"]</button>
                                     </div>
                                 </div>
                                 @* <a class="btn btn-primary" asp-area="" asp-controller="Wallet" asp-action="Unlock"
                                     asp-route-name="@Model.WalletInfo?.Walletname">
                                     <i class="bi bi-unlock"></i> @Localizer["Unlock"]
-                                </a> *@
+                                    </a> *@
                             </div>
                         }
 
@@ -127,17 +129,17 @@
 
                         @if (Model.WalletInfo != null && Model.WalletInfo.Scanning != null)
                         {
-                            <div class="col-md-4 text-muted">
+                            <div class="col-md-7 text-muted">
                                 @Localizer["Duration"]
                                 <div class="small"><i class="bi bi-info-circle"></i> @Localizer["DurationDesc"]</div>
                             </div>
-                            <div class="col-md-8">@Model.WalletInfo.Scanning.DurationAsTimeSpan.ToString()</div>
+                            <div class="col-md-5">@Model.WalletInfo.Scanning.DurationAsTimeSpan.ToString()</div>
 
-                            <div class="col-md-4 text-muted">
+                            <div class="col-md-7 text-muted">
                                 @Localizer["Progress"]
                                 <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ProgressDesc"]</div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-5">
                                 <div class="progress">
                                     <div class="progress-bar" style="width: @(Model.WalletInfo.Scanning.Progress100)%; role="
                                 progressbar" aria-valuenow="@(Model.WalletInfo.Scanning.Progress100)" aria-valuemin="0"
@@ -164,11 +166,66 @@
                 </div>
             </div>
         </div>
+        
         <div class="col-md-6 col-sm-12">
             <div class="card panel-primary">
-                <div class="card-header">@Localizer["Balance"]</div>
+                <div class="card-header">@Localizer["Balances"]</div>
                 <div class="card-body">
                     <div class="row">
+                        
+                        @if (Model.Balances != null && Model.Balances.Mine != null)
+                        {
+                            <div class="col-12">
+                                <h4>@Localizer["Mine"]</h4>
+                                <small class="text-muted"><i class="bi bi-info-circle"></i> @Localizer["MineDesc"]</small>
+                            </div>
+                            <div class="col-md-7 text-muted">
+                                @Localizer["Trusted"]
+                                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["TrustedDesc"]</div>
+                            </div>
+                            <div class="col-md-5">@Model.Balances.Mine.Trusted</div>
+                            <div class="col-md-7 text-muted">
+                                @Localizer["Untrusted_pending"]
+                                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Untrusted_pendingDesc"]</div>
+                            </div>
+                            <div class="col-md-5">@Model.Balances.Mine.Untrusted_pending</div>
+                            <div class="col-md-7 text-muted">
+                                @Localizer["Immarute"]
+                                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ImmaruteDesc"]</div>
+                            </div>
+                            <div class="col-md-5">@Model.Balances.Mine.Immarute</div>
+                            @if (Model?.WalletInfo?.Avoid_reuse == true)
+                            {
+                                <div class="col-md-7 text-muted">
+                                    @Localizer["Used"]
+                                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["UsedDesc"]</div>
+                                </div>
+                                <div class="col-md-5">@Model.Balances.Mine.Used</div>
+                            }
+                        }
+
+                        @if (Model != null && Model.Balances != null && Model.Balances.Watchonly != null) 
+                        {
+                            <div class="col-12">
+                                <h4>@Localizer["Watchonly"]</h4>
+                                <small class="text-muted"><i class="bi bi-info-circle"></i> @Localizer["WatchonlyDesc"]</small>
+                            </div>
+                            <div class="col-md-7 text-muted">
+                                @Localizer["Trusted"]
+                                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["TrustedDesc"]</div>
+                            </div>
+                            <div class="col-md-5">@Model.Balances.Watchonly.Trusted</div>
+                            <div class="col-md-7 text-muted">
+                                @Localizer["Untrusted_pending"]
+                                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Untrusted_pendingDesc"]</div>
+                            </div>
+                            <div class="col-md-5">@Model.Balances.Watchonly.Untrusted_pending</div>
+                            <div class="col-md-7 text-muted">
+                                @Localizer["Immarute"]
+                                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ImmaruteDesc"]</div>
+                            </div>
+                            <div class="col-md-5">@Model.Balances.Watchonly.Immarute</div>
+                        }
 
                     </div>
                 </div>
@@ -179,8 +236,7 @@
 
 @section scripts {
 <script>
-    function Unlock() 
-    {
+    function Unlock() {
         var passphrase = $("#passphrase").val();
         var name = "@Model?.WalletInfo?.Walletname";
 

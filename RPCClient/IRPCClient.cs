@@ -9,4 +9,5 @@ public interface IRPCClient
     Task<VerifyChainResponse> GetVerifyChainInfo(VerifyChainRequest request);
     Task<WalletInfoResponse> GetWalletInfo(WalletInfoRequest request);
     Task<RPCResponse> GetWalletPassphrase(PassphraseRequest request);
+    Task<BalancesResponse> GetBalances(BalancesRequest request);
 }
