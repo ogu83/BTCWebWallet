@@ -10,4 +10,6 @@ public interface IRPCClient
     Task<WalletInfoResponse> GetWalletInfo(WalletInfoRequest request);
     Task<RPCResponse> GetWalletPassphrase(PassphraseRequest request);
     Task<BalancesResponse> GetBalances(BalancesRequest request);
+    Task<AddressesByLabelResponse> GetAddressesByLabel(AddressesByLabelRequest request);
+    Task<GetNewAddressResponse> GetNewAddress(GetNewAddressRequest request);
 }

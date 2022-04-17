@@ -293,4 +293,56 @@
     <value>watchonly balances (not present if wallet does not watch anything)</value>
     <comment/>
   </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+    <comment/>
+  </data>
+  <data name="Addresses" xml:space="preserve">
+    <value>Addresses</value>
+    <comment/>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transactions</value>
+    <comment/>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+    <comment/>
+  </data>
+  <data name="Purpose" xml:space="preserve">
+    <value>Purpose</value>
+    <comment/>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+    <comment/>
+  </data>
+  <data name="Wallets" xml:space="preserve">
+    <value>Wallets</value>
+    <comment/>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+    <comment/>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment/>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+    <comment/>
+  </data>
+  <data name="AddNewAddress" xml:space="preserve">
+    <value>Add New Address</value>
+    <comment/>
+  </data>
+  <data name="Label" xml:space="preserve">
+    <value>Label</value>
+    <comment/>
+  </data>
+  <data name="EnterAlabel" xml:space="preserve">
+    <value>Enter a label</value>
+    <comment/>
+  </data>
 </root>

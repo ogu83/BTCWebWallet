@@ -11,168 +11,19 @@
 
 @if (Model != null && Model.IsSuccess)
 {
+    <h2> <a asp-action="Index">@Localizer["Wallets"]</a> > @Model.WalletInfo?.Walletname</h2>
+
     <div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="card panel-primary">
-            <div class="card-header">@Localizer["Wallet"] <i>@Model.WalletInfo?.Walletname</i></div>
-            <div class="card-body">
-                <div class="row">
 
-                    @if (Model.WalletInfo?.Unlocked_until > 0)
-                        {
-                            <div class="col-md-7 text-muted">
-                                @Localizer["Unlocked_until"]
-                                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Unlocked_untilDesc"]</div>
-                            </div>
-                            <div class="col-md-5">@Model.WalletInfo?.Unlocked_until.ToDateTime().ToLocalTime().ToString()</div>
-                        }
-                        else
-                        {
-                            <div class="col-12">
-                                <div class="row g-3">
-                                    <div class="col-auto">
-                                        <label for="passphrase" class="visually-hidden">@Localizer["Passphrase"]</label>
-                                        <input id="passphrase" type="password" class="form-control"
-                                    placeholder="@Localizer["Passphrase"]" required>
-                                    </div>
-                                    <div class="col-auto">
-                                        <button onclick="Unlock();" type="button" class="btn btn-primary mb-3"><i
-                                        class="bi bi-unlock"></i> @Localizer["Unlock"]</button>
-                                    </div>
-                                </div>
-                                @* <a class="btn btn-primary" asp-area="" asp-controller="Wallet" asp-action="Unlock"
-                                    asp-route-name="@Model.WalletInfo?.Walletname">
-                                    <i class="bi bi-unlock"></i> @Localizer["Unlock"]
-                                    </a> *@
-                            </div>
-                        }
-
-                        <div class="col-md-7 text-muted">
-                            @Localizer["Version"]
-                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["VersionDesc"]</div>
-                        </div>
-                        <div class="col-md-5">@Model.WalletInfo?.Walletversion</div>
-
-                        <div class="col-md-7 text-muted">
-                            @Localizer["Format"]
-                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["FormatDesc"]</div>
-                        </div>
-                        <div class="col-md-5">@Model.WalletInfo?.Format</div>
-
-                        <div class="col-md-7 text-muted">
-                            @Localizer["Txcount"]
-                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["TxcountDesc"]</div>
-                        </div>
-                        <div class="col-md-5">@Model.WalletInfo?.Txcount</div>
-
-                        <div class="col-md-7 text-muted">
-                            @Localizer["Keypoololdest"]
-                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["KeypoololdestDesc"]</div>
-                        </div>
-                        <div class="col-md-5">@Model.WalletInfo?.Keypoololdest.ToDateTime().ToLocalTime().ToString()</div>
-
-                        <div class="col-md-7 text-muted">
-                            @Localizer["Keypoolsize"]
-                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["KeypoolsizeDesc"]</div>
-                        </div>
-                        <div class="col-md-5">@Model.WalletInfo?.Keypoolsize</div>
-
-                        <div class="col-md-7 text-muted">
-                            @Localizer["Keypoolsize_hd_internal"]
-                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Keypoolsize_hd_internalDesc"]
-                            </div>
-                        </div>
-                        <div class="col-md-5">@Model.WalletInfo?.Keypoolsize_hd_internal</div>
-
-                        <div class="col-md-7 text-muted">
-                            @Localizer["Paytxfee"]
-                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["PaytxfeeDesc"]</div>
-                        </div>
-                        <div class="col-md-5">@Model.WalletInfo?.Paytxfee</div>
-
-                        <div class="col-md-7 text-muted">
-                            @Localizer["Hdseedid"]
-                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["HdseedidDesc"]</div>
-                        </div>
-                        <div class="col-md-5">@Model.WalletInfo?.Hdseedid</div>
-
-                        <div class="col-md-7 text-muted">
-                            @Localizer["Private_keys_enabled"]
-                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Private_keys_enabledDesc"]
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            @if (Model.WalletInfo != null && Model.WalletInfo.Private_keys_enabled)
-                            {
-                                <i class="bi bi-check-lg"></i>
-                            }
-                            else
-                            {
-                                <i class="bi bi-x-lg"></i>
-                            }
-                        </div>
-
-                        <div class="col-md-7 text-muted">
-                            @Localizer["Avoid_reuse"]
-                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Avoid_reuseDesc"]</div>
-                        </div>
-                        <div class="col-md-5">
-                            @if (Model.WalletInfo != null && Model.WalletInfo.Avoid_reuse)
-                            {
-                                <i class="bi bi-check-lg"></i>
-                            }
-                            else
-                            {
-                                <i class="bi bi-x-lg"></i>
-                            }
-                        </div>
-
-                        @if (Model.WalletInfo != null && Model.WalletInfo.Scanning != null)
-                        {
-                            <div class="col-md-7 text-muted">
-                                @Localizer["Duration"]
-                                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["DurationDesc"]</div>
-                            </div>
-                            <div class="col-md-5">@Model.WalletInfo.Scanning.DurationAsTimeSpan.ToString()</div>
-
-                            <div class="col-md-7 text-muted">
-                                @Localizer["Progress"]
-                                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ProgressDesc"]</div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: @(Model.WalletInfo.Scanning.Progress100)%; role="
-                                progressbar" aria-valuenow="@(Model.WalletInfo.Scanning.Progress100)" aria-valuemin="0"
-                                aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        }
-
-                        <div class="col-md-7 text-muted">
-                            @Localizer["Descriptors"]
-                            <div class="small"><i class="bi bi-info-circle"></i> @Localizer["DescriptorsDesc"]</div>
-                        </div>
-                        <div class="col-md-5">
-                            @if (Model.WalletInfo != null && Model.WalletInfo.Descriptors)
-                            {
-                                <i class="bi bi-check-lg"></i>
-                            }
-                            else
-                            {
-                                <i class="bi bi-x-lg"></i>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-6 p-1">
+            @await Html.PartialAsync("_WalletInfo", Model.WalletInfo)
         </div>
-        
-        <div class="col-md-6 col-sm-12">
+
+        <div class="col-6 p-1">
             <div class="card panel-primary">
                 <div class="card-header">@Localizer["Balances"]</div>
                 <div class="card-body">
                     <div class="row">
-                        
                         @if (Model.Balances != null && Model.Balances.Mine != null)
                         {
                             <div class="col-12">
@@ -204,7 +55,7 @@
                             }
                         }
 
-                        @if (Model != null && Model.Balances != null && Model.Balances.Watchonly != null) 
+                        @if (Model != null && Model.Balances != null && Model.Balances.Watchonly != null)
                         {
                             <div class="col-12">
                                 <h4>@Localizer["Watchonly"]</h4>
@@ -231,6 +82,84 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-6 p-1">
+            <div class="card panel-primary">
+                <div class="card-header">
+                    @Localizer["Addresses"]
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addAddressModal">
+                        <i class="bi bi-plus"></i> Add
+                    </button>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <th scope="col">@Localizer["Address"]</th>
+                            <th scope="col">@Localizer["Purpose"]</th>
+                            <th scope="col">@Localizer["Action"]</th>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Addresses != null && Model.Addresses.Any())
+                            {
+                                @foreach (var a in Model.Addresses)
+                                {
+                                    <tr>
+                                        <td>@a.Key</td>
+                                        <td>@a.Value.Purpose</td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <button class="btn btn-sm btn-secondary"><i class="bi bi-qr-code"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 p-1">
+            <div class="card panel-primary">
+                <div class="card-header">@Localizer["Transactions"]</div>
+                <div class="card-body">
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAddressModalLabel">@Localizer["AddNewAddress"]</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-1">
+                    <label for="txtLabel" class="form-label">@Localizer["Label"]</label>
+                    <input id="txtLabel" class="form-control" placeholder='@Localizer["EnterAlabel"]' />    
+                </div>
+                <div class="mb-1">
+                    <label for="ddAddressType" class="form-label">@Localizer["Label"]</label>
+                    <select id="ddAddressType" class="form-select" placeholder='@Localizer["EnterAlabel"]'>
+                        <option value="legacy">legacy</option>
+                        <option value="p2sh-segwit">p2sh-segwit</option>
+                        <option value="bech32">bech32</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Close"]</button>
+                <button type="button" class="btn btn-primary" onclick="AddNewAddress();">@Localizer["Add"]</button>
+            </div>
+            </div>
+        </div>
     </div>
 }
 
@@ -245,7 +174,27 @@
         var url = `/${controllerName}/${actionName}`;
         var model = {
             passphrase: passphrase,
+            name: name
+        };
+
+        $.post(url, model, "json")
+            .done(function (result) {
+                window.location.reload();
+            });
+    }
+
+    function AddNewAddress() {
+        var name = "@Model?.WalletInfo?.Walletname";
+        var label = $("#txtLabel").val();
+        var addresType = $("#ddAddressType").val();
+
+        var controllerName = "Wallet";
+        var actionName = "@nameof(WalletController.AddNewAddress)";
+        var url = `/${controllerName}/${actionName}`;
+        var model = {
             name: name,
+            label: label,
+            addresType: addresType
         };
 
         $.post(url, model, "json")

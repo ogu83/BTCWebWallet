@@ -1,0 +1,155 @@
+@using BTCWebWallet.Controllers
+@using BTCWebWallet.Helpers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@model BTCWebWallet.RPCClient.WalletInfoResult
+
+<div class="card panel-primary">
+    <div class="card-header">@Localizer["Info"]</div>
+    <div class="card-body">
+        <div class="row">
+
+            @if (Model?.Unlocked_until > 0)
+            {
+                <div class="col-md-7 text-muted">
+                    @Localizer["Unlocked_until"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Unlocked_untilDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model?.Unlocked_until.ToDateTime().ToLocalTime().ToString()</div>
+            }
+            else
+            {
+                <div class="col-12">
+                    <div class="row g-3">
+                        <div class="col-auto">
+                            <label for="passphrase" class="visually-hidden">@Localizer["Passphrase"]</label>
+                            <input id="passphrase" type="password" class="form-control"
+                            placeholder="@Localizer["Passphrase"]" required>
+                        </div>
+                        <div class="col-auto">
+                            <button onclick="Unlock();" type="button" class="btn btn-primary mb-3"><i
+                                class="bi bi-unlock"></i> @Localizer["Unlock"]</button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="col-md-7 text-muted">
+                @Localizer["Version"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["VersionDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model?.Walletversion</div>
+
+            <div class="col-md-7 text-muted">
+                @Localizer["Format"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["FormatDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model?.Format</div>
+
+            <div class="col-md-7 text-muted">
+                @Localizer["Txcount"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["TxcountDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model?.Txcount</div>
+
+            <div class="col-md-7 text-muted">
+                @Localizer["Keypoololdest"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["KeypoololdestDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model?.Keypoololdest.ToDateTime().ToLocalTime().ToString()</div>
+
+            <div class="col-md-7 text-muted">
+                @Localizer["Keypoolsize"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["KeypoolsizeDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model?.Keypoolsize</div>
+
+            <div class="col-md-7 text-muted">
+                @Localizer["Keypoolsize_hd_internal"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Keypoolsize_hd_internalDesc"]
+                </div>
+            </div>
+            <div class="col-md-5">@Model?.Keypoolsize_hd_internal</div>
+
+            <div class="col-md-7 text-muted">
+                @Localizer["Paytxfee"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["PaytxfeeDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model?.Paytxfee</div>
+
+            <div class="col-md-7 text-muted">
+                @Localizer["Hdseedid"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["HdseedidDesc"]</div>
+            </div>
+            <div class="col-md-5">@Model?.Hdseedid</div>
+
+            <div class="col-md-7 text-muted">
+                @Localizer["Private_keys_enabled"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Private_keys_enabledDesc"]
+                </div>
+            </div>
+            <div class="col-md-5">
+                @if (Model != null && Model.Private_keys_enabled)
+                {
+                    <i class="bi bi-check-lg"></i>
+                }
+                else
+                {
+                    <i class="bi bi-x-lg"></i>
+                }
+            </div>
+
+            <div class="col-md-7 text-muted">
+                @Localizer["Avoid_reuse"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Avoid_reuseDesc"]</div>
+            </div>
+            <div class="col-md-5">
+                @if (Model != null && Model.Avoid_reuse)
+                {
+                    <i class="bi bi-check-lg"></i>
+                }
+                else
+                {
+                    <i class="bi bi-x-lg"></i>
+                }
+            </div>
+
+            @if (Model != null && Model.Scanning != null)
+            {
+                <div class="col-md-7 text-muted">
+                    @Localizer["Duration"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["DurationDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Scanning.DurationAsTimeSpan.ToString()</div>
+
+                <div class="col-md-7 text-muted">
+                    @Localizer["Progress"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ProgressDesc"]</div>
+                </div>
+                <div class="col-md-5">
+                    <div class="progress">
+                        <div class="progress-bar" style="width: @(Model.Scanning.Progress100)%; role="
+                        progressbar" aria-valuenow="@(Model.Scanning.Progress100)" aria-valuemin="0"
+                        aria-valuemax="100"></div>
+                    </div>
+                </div>
+            }
+
+            <div class="col-md-7 text-muted">
+                @Localizer["Descriptors"]
+                <div class="small"><i class="bi bi-info-circle"></i> @Localizer["DescriptorsDesc"]</div>
+            </div>
+            <div class="col-md-5">
+                @if (Model != null && Model.Descriptors)
+                {
+                    <i class="bi bi-check-lg"></i>
+                }
+                else
+                {
+                    <i class="bi bi-x-lg"></i>
+                }
+            </div>
+        </div>
+    </div>
+</div>

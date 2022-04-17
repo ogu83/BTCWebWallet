@@ -141,4 +141,18 @@ public class RPCClient : IRPCClient
         var castedResponse = response as BalancesResponse;
         return castedResponse;
     }
+
+    public async Task<AddressesByLabelResponse> GetAddressesByLabel(AddressesByLabelRequest request)
+    {
+        var response = await GetWalletResponse<AddressesByLabelResponse>(request);
+        var castedResponse = response as AddressesByLabelResponse;
+        return castedResponse;
+    }
+
+    public async Task<GetNewAddressResponse> GetNewAddress(GetNewAddressRequest request)
+    {
+        var response = await GetWalletResponse<GetNewAddressResponse>(request);
+        var castedResponse = response as GetNewAddressResponse;
+        return castedResponse;
+    }
 }

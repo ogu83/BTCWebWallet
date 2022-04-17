@@ -78,6 +78,18 @@ public class WalletController : BaseController
             AddPageError(RPCErrorToErrorViewModel(balancesResponse.Error));
         }
 
+        var addressesResponse = await _rpcClient.GetAddressesByLabel(new AddressesByLabelRequest(rpc_id, name, ""));
+        if (!addressesResponse.HasError)
+        {
+            model.IsSuccess = model.IsSuccess && true;
+            model.Addresses = addressesResponse.Result;
+        }
+        else
+        {
+            _logger.LogError($"RPC Error {addressesResponse.Error}");
+            AddPageError(RPCErrorToErrorViewModel(addressesResponse.Error));
+        }
+
         return View(model);
     }
 
@@ -135,5 +147,18 @@ public class WalletController : BaseController
         }
 
         return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddNewAddress(string name, string label, string addressType)
+    {
+        var response = await _rpcClient.GetNewAddress(new GetNewAddressRequest(rpc_id, name, label, addressType));
+        if (response.HasError)
+        {
+            _logger.LogError($"RPC Error {response.Error}");
+            AddPageError(RPCErrorToErrorViewModel(response.Error));
+        }
+
+        return Json(true);
     }
 }
