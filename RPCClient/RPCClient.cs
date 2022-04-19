@@ -155,4 +155,11 @@ public class RPCClient : IRPCClient
         var castedResponse = response as GetNewAddressResponse;
         return castedResponse;
     }
+
+    public async Task<ListLabelsResponse> GetListLabels(ListLabelsRequest request)
+    {
+        var response = await GetWalletResponse<ListLabelsResponse>(request);
+        var castedResponse = response as ListLabelsResponse;
+        return castedResponse;
+    }
 }

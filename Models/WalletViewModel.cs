@@ -8,5 +8,5 @@ public class WalletViewModel : BaseViewModel
 
     public RPCClient.BalancesResult? Balances { get; set; }
 
-    public RPCClient.AddressesResult? Addresses { get; set; }
+    public List<AddressViewModel>? Addresses { get; set;}
 }

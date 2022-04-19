@@ -96,6 +96,7 @@
                         <thead>
                             <th scope="col">@Localizer["Address"]</th>
                             <th scope="col">@Localizer["Purpose"]</th>
+                            <th scope="col">@Localizer["Label"]</th>
                             <th scope="col">@Localizer["Action"]</th>
                         </thead>
                         <tbody>
@@ -105,7 +106,8 @@
                                 {
                                     <tr>
                                         <td>@a.Key</td>
-                                        <td>@a.Value.Purpose</td>
+                                        <td>@a.Purpose</td>
+                                        <td>@a.Label</td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
                                                 <button class="btn btn-sm btn-secondary"><i class="bi bi-qr-code"></i></button>
@@ -186,7 +188,7 @@
     function AddNewAddress() {
         var name = "@Model?.WalletInfo?.Walletname";
         var label = $("#txtLabel").val();
-        var addresType = $("#ddAddressType").val();
+        var addressType = $("#ddAddressType").val();
 
         var controllerName = "Wallet";
         var actionName = "@nameof(WalletController.AddNewAddress)";
@@ -194,7 +196,7 @@
         var model = {
             name: name,
             label: label,
-            addresType: addresType
+            addressType: addressType
         };
 
         $.post(url, model, "json")

@@ -12,7 +12,7 @@ public class WalletController : BaseController
     private readonly IRPCClient _rpcClient;
     private readonly IStringLocalizer<WalletController> _localizer;
     private readonly IConfiguration _configuration;
-    
+
     public WalletController(
         ILogger<WalletController> logger,
         IRPCClient rpcClient,
@@ -78,16 +78,39 @@ public class WalletController : BaseController
             AddPageError(RPCErrorToErrorViewModel(balancesResponse.Error));
         }
 
-        var addressesResponse = await _rpcClient.GetAddressesByLabel(new AddressesByLabelRequest(rpc_id, name, ""));
-        if (!addressesResponse.HasError)
+        var labelsResponse = await _rpcClient.GetListLabels(new ListLabelsRequest(rpc_id, name, "receive"));
+        if (!labelsResponse.HasError)
         {
             model.IsSuccess = model.IsSuccess && true;
-            model.Addresses = addressesResponse.Result;
+            model.Addresses = new List<AddressViewModel>();
+            foreach (var label in labelsResponse.Result ?? new List<StringResult>())
+            {
+                var str_label = label == null ? string.Empty : label.Value; 
+                var addressesResponse = await _rpcClient.GetAddressesByLabel(new AddressesByLabelRequest(rpc_id, name, str_label));
+                if (!addressesResponse.HasError)
+                {
+                    model.IsSuccess = model.IsSuccess && true;
+                    if (addressesResponse.Result != null)
+                    {
+                        model.Addresses
+                             .AddRange(addressesResponse.Result
+                                                        .Select(x => new AddressViewModel { 
+                                                                Key = x.Key, 
+                                                                Purpose = x.Value.Purpose, 
+                                                                Label = str_label }));
+                    }
+                }
+                else
+                {
+                    _logger.LogError($"RPC Error {addressesResponse.Error}");
+                    AddPageError(RPCErrorToErrorViewModel(addressesResponse.Error));
+                }
+            }
         }
         else
         {
-            _logger.LogError($"RPC Error {addressesResponse.Error}");
-            AddPageError(RPCErrorToErrorViewModel(addressesResponse.Error));
+            _logger.LogError($"RPC Error {labelsResponse.Error}");
+            AddPageError(RPCErrorToErrorViewModel(labelsResponse.Error));
         }
 
         return View(model);
