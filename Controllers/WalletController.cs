@@ -85,7 +85,7 @@ public class WalletController : BaseController
             model.Addresses = new List<AddressViewModel>();
             foreach (var label in labelsResponse.Result ?? new List<StringResult>())
             {
-                var str_label = label == null ? string.Empty : label.Value; 
+                var str_label = label == null ? string.Empty : label.Value;
                 var addressesResponse = await _rpcClient.GetAddressesByLabel(new AddressesByLabelRequest(rpc_id, name, str_label));
                 if (!addressesResponse.HasError)
                 {
@@ -94,10 +94,12 @@ public class WalletController : BaseController
                     {
                         model.Addresses
                              .AddRange(addressesResponse.Result
-                                                        .Select(x => new AddressViewModel { 
-                                                                Key = x.Key, 
-                                                                Purpose = x.Value.Purpose, 
-                                                                Label = str_label }));
+                                                        .Select(x => new AddressViewModel
+                                                        {
+                                                            Key = x.Key,
+                                                            Purpose = x.Value.Purpose,
+                                                            Label = str_label
+                                                        }));
                     }
                 }
                 else
@@ -111,6 +113,29 @@ public class WalletController : BaseController
         {
             _logger.LogError($"RPC Error {labelsResponse.Error}");
             AddPageError(RPCErrorToErrorViewModel(labelsResponse.Error));
+        }
+
+        var transactionsResponse = await _rpcClient.GetListTransactions(new ListTransactionsRequest(rpc_id, name));
+        if (!transactionsResponse.HasError)
+        {
+            model.IsSuccess = model.IsSuccess && true;
+            var transactionsModel = transactionsResponse.Result?.Select(t => new TransactionViewModel
+            {
+                Id = t.Txid,
+                Time = t.Time.ToDateTime(),
+                RecievedTime = t.Timereceived.ToDateTime(),
+                Amount = t.Amount,
+                Fee = t.Fee, 
+                Category = t.Category,
+                Abandoned = t.Abandoned,
+                Address = t.Address,
+                Confirmations = t.Confirmations,
+                Label = t.Label,
+                Trusted = t.Trusted,
+                Comment = t.Comment,
+                Bip125Replaceable = t.Bip125Replaceable
+            }).ToList();
+            model.Transactions = transactionsModel;
         }
 
         return View(model);

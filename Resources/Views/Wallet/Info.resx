@@ -345,4 +345,40 @@
     <value>Enter a label</value>
     <comment/>
   </data>
+  <data name="RecievedTime" xml:space="preserve">
+    <value>Recieved Time</value>
+    <comment/>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+    <comment/>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+    <comment/>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+    <comment/>
+  </data>
+  <data name="Fee" xml:space="preserve">
+    <value>Fee</value>
+    <comment/>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+    <comment/>
+  </data>
+  <data name="Confirmations" xml:space="preserve">
+    <value>Confirmations</value>
+    <comment/>
+  </data>
+  <data name="Abandoned" xml:space="preserve">
+    <value>Abandoned</value>
+    <comment/>
+  </data>
+  <data name="Replaceable" xml:space="preserve">
+    <value>Replaceable</value>
+    <comment/>
+  </data>
 </root>

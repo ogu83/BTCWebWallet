@@ -162,4 +162,11 @@ public class RPCClient : IRPCClient
         var castedResponse = response as ListLabelsResponse;
         return castedResponse;
     }
+
+    public async Task<ListTransactionsResponse> GetListTransactions(ListTransactionsRequest request)
+    {
+        var response = await GetWalletResponse<ListTransactionsResponse>(request);
+        var castedResponse = response as ListTransactionsResponse;
+        return castedResponse;
+    }
 }
