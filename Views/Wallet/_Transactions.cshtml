@@ -1,0 +1,62 @@
+@using BTCWebWallet.Controllers
+@using BTCWebWallet.Helpers
+@using BTCWebWallet.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@model WalletViewModel
+
+<div class="card panel-primary">
+    <div class="card-header">@Localizer["Transactions"]</div>
+    <div class="card-body">
+        <table class="table table-striped table-sm">
+            <thead>
+                <th scope="col">@Localizer["Id"] - @Localizer["Address"]</th>
+                <th scope="col">@Localizer["Time"]</th>
+                <th scope="col">@Localizer["RecievedTime"]</th>
+                <th scope="col">@Localizer["Amount"]</th>
+                <th scope="col">@Localizer["Fee"]</th>
+                <th scope="col">@Localizer["Category"]</th>
+                <th scope="col">@Localizer["Confirmations"]</th>
+                <th scope="col">@Localizer["Abandoned"]</th>
+                <th scope="col">@Localizer["Trusted"]</th>
+                <th scope="col">@Localizer["Replaceable"]</th>
+            </thead>
+            <tbody>
+                @foreach (var t in Model?.Transactions ?? new List<TransactionViewModel>())
+                {
+                    <tr>
+                        <td><a href="#">@t.Id</a> @t.Address</td>
+                        <td>@t.Time</td>
+                        <td>@t.RecievedTime</td>
+                        <td>@t.Amount</td>
+                        <td>@t.Fee</td>
+                        <td>@t.Category</td>
+                        <td>@t.Confirmations</td>
+                        <td>
+                            @if (@t.Abandoned)
+                            {
+                                <i class="bi bi-check-lg"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-x-lg"></i>
+                            }
+                        </td>
+                        <td>
+                            @if (@t.Trusted)
+                            {
+                                <i class="bi bi-check-lg"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-x-lg"></i>
+                            }
+                        </td>
+                        <td>@t.Bip125Replaceable</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
