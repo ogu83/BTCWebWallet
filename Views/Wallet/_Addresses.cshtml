@@ -1,0 +1,44 @@
+@using BTCWebWallet.Controllers
+@using BTCWebWallet.Helpers
+@using BTCWebWallet.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@model WalletViewModel
+
+<div class="card panel-primary">
+    <div class="card-header">
+        @Localizer["Addresses"]
+        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addAddressModal">
+            <i class="bi bi-plus"></i> Add
+        </button>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <th scope="col">@Localizer["Address"]</th>
+                <th scope="col">@Localizer["Purpose"]</th>
+                <th scope="col">@Localizer["Label"]</th>
+                <th scope="col">@Localizer["Action"]</th>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Addresses != null && Model.Addresses.Any())
+                {
+                    @foreach (var a in Model.Addresses)
+                    {
+                        <tr>
+                            <td>@a.Key</td>
+                            <td>@a.Purpose</td>
+                            <td>@a.Label</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-sm btn-secondary"><i class="bi bi-qr-code"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+@using BTCWebWallet.Controllers
+@using BTCWebWallet.Helpers
+@using BTCWebWallet.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@model WalletViewModel
+
+<div class="card panel-primary">
+    <div class="card-header">@Localizer["Balances"]</div>
+    <div class="card-body">
+        <div class="row">
+            @if (Model.Balances != null && Model.Balances.Mine != null)
+            {
+                <div class="col-12">
+                    <h4>@Localizer["Mine"]</h4>
+                    <small class="text-muted"><i class="bi bi-info-circle"></i> @Localizer["MineDesc"]</small>
+                </div>
+                <div class="col-md-7 text-muted">
+                    @Localizer["Trusted"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["TrustedDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Balances.Mine.Trusted</div>
+                <div class="col-md-7 text-muted">
+                    @Localizer["Untrusted_pending"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Untrusted_pendingDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Balances.Mine.Untrusted_pending</div>
+                <div class="col-md-7 text-muted">
+                    @Localizer["Immarute"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ImmaruteDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Balances.Mine.Immarute</div>
+                @if (Model?.WalletInfo?.Avoid_reuse == true)
+                {
+                    <div class="col-md-7 text-muted">
+                        @Localizer["Used"]
+                        <div class="small"><i class="bi bi-info-circle"></i> @Localizer["UsedDesc"]</div>
+                    </div>
+                    <div class="col-md-5">@Model.Balances.Mine.Used</div>
+                }
+            }
+
+            @if (Model != null && Model.Balances != null && Model.Balances.Watchonly != null)
+            {
+                <div class="col-12">
+                    <h4>@Localizer["Watchonly"]</h4>
+                    <small class="text-muted"><i class="bi bi-info-circle"></i> @Localizer["WatchonlyDesc"]</small>
+                </div>
+                <div class="col-md-7 text-muted">
+                    @Localizer["Trusted"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["TrustedDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Balances.Watchonly.Trusted</div>
+                <div class="col-md-7 text-muted">
+                    @Localizer["Untrusted_pending"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["Untrusted_pendingDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Balances.Watchonly.Untrusted_pending</div>
+                <div class="col-md-7 text-muted">
+                    @Localizer["Immarute"]
+                    <div class="small"><i class="bi bi-info-circle"></i> @Localizer["ImmaruteDesc"]</div>
+                </div>
+                <div class="col-md-5">@Model.Balances.Watchonly.Immarute</div>
+            }
+
+        </div>
+    </div>
+</div>
