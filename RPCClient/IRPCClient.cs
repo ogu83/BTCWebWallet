@@ -14,4 +14,5 @@ public interface IRPCClient
     Task<GetNewAddressResponse> GetNewAddress(GetNewAddressRequest request);
     Task<ListLabelsResponse> GetListLabels(ListLabelsRequest request);
     Task<ListTransactionsResponse> GetListTransactions(ListTransactionsRequest request);
+    Task<SendToAddressResponse> SendToAddress(SendToAddressRequest request);
 }

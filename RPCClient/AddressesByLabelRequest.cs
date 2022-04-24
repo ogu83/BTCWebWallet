@@ -16,9 +16,9 @@ public class AddressesByLabelRequest : RPCWalletRequest
     {
         get
         {
-            var retval = new object[] 
+            var retval = new object[]
             {
-                Label              
+                Label
             };
 
             return retval.ToList();

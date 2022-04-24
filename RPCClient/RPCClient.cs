@@ -169,4 +169,11 @@ public class RPCClient : IRPCClient
         var castedResponse = response as ListTransactionsResponse;
         return castedResponse;
     }
+
+    public async Task<SendToAddressResponse> SendToAddress(SendToAddressRequest request)
+    {
+        var response = await GetWalletResponse<SendToAddressResponse>(request);
+        var castedResponse = response as SendToAddressResponse;
+        return castedResponse;
+    }
 }
