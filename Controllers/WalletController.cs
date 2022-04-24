@@ -125,7 +125,7 @@ public class WalletController : BaseController
                 Time = t.Time.ToDateTime(),
                 RecievedTime = t.Timereceived.ToDateTime(),
                 Amount = t.Amount,
-                Fee = t.Fee, 
+                Fee = t.Fee,
                 Category = t.Category,
                 Abandoned = t.Abandoned,
                 Address = t.Address,
@@ -208,5 +208,25 @@ public class WalletController : BaseController
         }
 
         return Json(true);
+    }
+
+    public async Task<IActionResult> SendToAddress(
+        string name, string address, decimal amount,
+        string comment, string comment_to,
+        bool subtractfeefromamount, bool replaceable, int conf_target, string estimate_mode, bool avoid_reuse)
+    {
+        var response = await _rpcClient.SendToAddress(new SendToAddressRequest(
+            rpc_id, name,
+            address, amount,
+            comment, comment_to,
+            subtractfeefromamount, replaceable, conf_target, estimate_mode, avoid_reuse));
+
+        if (response.HasError)
+        {
+            _logger.LogError($"RPC Error {response.Error}");
+            AddPageError(RPCErrorToErrorViewModel(response.Error));
+        }
+
+        return Json(response.Result?.Value);
     }
 }
