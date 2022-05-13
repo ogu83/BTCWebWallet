@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Balance" xml:space="preserve">
+    <value>Balance</value>
+    <comment/>
+  </data>
+  <data name="Balances" xml:space="preserve">
+    <value>Balances</value>
+    <comment/>
+  </data>
+  <data name="Wallet" xml:space="preserve">
+    <value>Wallet</value>
+    <comment/>
+  </data>
+  <data name="Unlocked_until" xml:space="preserve">
+    <value>Unlocked Until</value>
+    <comment/>
+  </data>
+  <data name="Unlocked_untilDesc" xml:space="preserve">
+    <value>the UNIX epoch time until which the wallet is unlocked for transfers, or 0 if the wallet is locked (only present for passphrase-encrypted wallets)</value>
+    <comment/>
+  </data>
+  <data name="Passphrase" xml:space="preserve">
+    <value>Passphrase</value>
+    <comment/>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+    <comment/>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+    <comment/>
+  </data>
+  <data name="VersionDesc" xml:space="preserve">
+    <value>the wallet version</value>
+    <comment/>
+  </data>
+  <data name="Format" xml:space="preserve">
+    <value>Format</value>
+    <comment/>
+  </data>
+  <data name="FormatDesc" xml:space="preserve">
+    <value>the database format (bdb or sqlite)</value>
+    <comment/>
+  </data>
+  <data name="Txcount" xml:space="preserve">
+    <value>Transaction Count</value>
+    <comment/>
+  </data>
+  <data name="TxcountDesc" xml:space="preserve">
+    <value>the total number of transactions in the wallet</value>
+    <comment/>
+  </data>
+  <data name="Keypoololdest" xml:space="preserve">
+    <value>Keypoololdest</value>
+    <comment/>
+  </data>
+  <data name="KeypoololdestDesc" xml:space="preserve">
+    <value> the UNIX epoch time of the oldest pre-generated key in the key pool. Legacy wallets only.</value>
+    <comment/>
+  </data>
+  <data name="Keypoolsize" xml:space="preserve">
+    <value>Key Pool Size</value>
+    <comment/>
+  </data>
+  <data name="KeypoolsizeDesc" xml:space="preserve">
+    <value>how many new keys are pre-generated (only counts external keys)</value>
+    <comment/>
+  </data>
+  <data name="Keypoolsize_hd_internal" xml:space="preserve">
+    <value>Key Pool Size Hd Internal</value>
+    <comment/>
+  </data>
+  <data name="Keypoolsize_hd_internalDesc" xml:space="preserve">
+    <value>how many new keys are pre-generated for internal use (used for change outputs, only appears if the wallet is using this feature, otherwise external keys are used)</value>
+    <comment/>
+  </data>
+  <data name="Paytxfee" xml:space="preserve">
+    <value>Pay Tx Fee</value>
+    <comment/>
+  </data>
+  <data name="PaytxfeeDesc" xml:space="preserve">
+    <value>the transaction fee configuration, set in BTC/kvB</value>
+    <comment/>
+  </data>
+  <data name="Hdseedid" xml:space="preserve">
+    <value>Hd Seed Id</value>
+    <comment/>
+  </data>
+  <data name="HdseedidDesc" xml:space="preserve">
+    <value>the Hash160 of the HD seed (only present when HD is enabled)</value>
+    <comment/>
+  </data>
+  <data name="Private_keys_enabled" xml:space="preserve">
+    <value>Private Keys Enabled</value>
+    <comment/>
+  </data>
+  <data name="Avoid_reuse" xml:space="preserve">
+    <value>Avoid Reuse</value>
+    <comment/>
+  </data>
+  <data name="Avoid_reuseDesc" xml:space="preserve">
+    <value>whether this wallet tracks clean/dirty coins in terms of reuse</value>
+    <comment/>
+  </data>
+  <data name="DurationDesc" xml:space="preserve">
+    <value>elapsed seconds since scan start</value>
+    <comment/>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+    <comment/>
+  </data>
+  <data name="Progress" xml:space="preserve">
+    <value>Progress</value>
+    <comment/>
+  </data>
+  <data name="ProgressDesc" xml:space="preserve">
+    <value>scanning progress percentage</value>
+    <comment/>
+  </data>
+  <data name="Descriptors" xml:space="preserve">
+    <value>Descriptors</value>
+    <comment/>
+  </data>
+  <data name="DescriptorsDesc" xml:space="preserve">
+    <value>whether this wallet uses descriptors for scriptPubKey management</value>
+    <comment/>
+  </data>
+  <data name="Used" xml:space="preserve">
+    <value>Used</value>
+    <comment/>
+  </data>
+  <data name="UsedDesc" xml:space="preserve">
+    <value>(only present if avoid_reuse is set) balance from coins sent to addresses that were previously spent from (potentially privacy violating)</value>
+    <comment/>
+  </data>
+  <data name="ImmatureDesc" xml:space="preserve">
+    <value>balance from immature coinbase outputs</value>
+    <comment/>
+  </data>
+  <data name="Immarute" xml:space="preserve">
+    <value>Immarute</value>
+    <comment/>
+  </data>
+  <data name="Untrusted_pending" xml:space="preserve">
+    <value>Untrusted_pending</value>
+    <comment/>
+  </data>
+  <data name="Untrusted_pendingDesc" xml:space="preserve">
+    <value>untrusted pending balance (outputs created by others that are in the mempool)</value>
+    <comment/>
+  </data>
+  <data name="Trusted" xml:space="preserve">
+    <value>Trusted</value>
+    <comment/>
+  </data>
+  <data name="TrustedDesc" xml:space="preserve">
+    <value>trusted balance (outputs created by the wallet or confirmed outputs)</value>
+    <comment/>
+  </data>
+  <data name="Mine" xml:space="preserve">
+    <value>Mine</value>
+    <comment/>
+  </data>
+  <data name="MineDesc" xml:space="preserve">
+    <value>balances from outputs that the wallet can sign</value>
+    <comment/>
+  </data>
+  <data name="Watchonly" xml:space="preserve">
+    <value>Watchonly</value>
+    <comment/>
+  </data>
+  <data name="WatchonlyDesc" xml:space="preserve">
+    <value>watchonly balances (not present if wallet does not watch anything)</value>
+    <comment/>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+    <comment/>
+  </data>
+  <data name="Addresses" xml:space="preserve">
+    <value>Addresses</value>
+    <comment/>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transactions</value>
+    <comment/>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+    <comment/>
+  </data>
+  <data name="Purpose" xml:space="preserve">
+    <value>Purpose</value>
+    <comment/>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+    <comment/>
+  </data>
+  <data name="Wallets" xml:space="preserve">
+    <value>Wallets</value>
+    <comment/>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+    <comment/>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment/>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+    <comment/>
+  </data>
+  <data name="AddNewAddress" xml:space="preserve">
+    <value>Add New Address</value>
+    <comment/>
+  </data>
+  <data name="Label" xml:space="preserve">
+    <value>Label</value>
+    <comment/>
+  </data>
+  <data name="EnterAlabel" xml:space="preserve">
+    <value>Enter a label</value>
+    <comment/>
+  </data>
+  <data name="RecievedTime" xml:space="preserve">
+    <value>Recieved Time</value>
+    <comment/>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+    <comment/>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+    <comment/>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+    <comment/>
+  </data>
+  <data name="Fee" xml:space="preserve">
+    <value>Fee</value>
+    <comment/>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+    <comment/>
+  </data>
+  <data name="Confirmations" xml:space="preserve">
+    <value>Confirmations</value>
+    <comment/>
+  </data>
+  <data name="Abandoned" xml:space="preserve">
+    <value>Abandoned</value>
+    <comment/>
+  </data>
+  <data name="Replaceable" xml:space="preserve">
+    <value>Replaceable</value>
+    <comment/>
+  </data>
+  <data name="EnterReceiverAddress" xml:space="preserve">
+    <value>Enter Receiver Address</value>
+    <comment/>
+  </data>
+  <data name="EnterAnAmount" xml:space="preserve">
+    <value>Enter An Amount</value>
+    <comment/>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+    <comment/>
+  </data>
+  <data name="EnterReceiverName" xml:space="preserve">
+    <value>Enter Receiver Name</value>
+    <comment/>
+  </data>
+  <data name="ReceiverName" xml:space="preserve">
+    <value>Receiver Name</value>
+    <comment/>
+  </data>
+  <data name="ConfirmationToTarget" xml:space="preserve">
+    <value>Confirmation To Target</value>
+    <comment/>
+  </data>
+  <data name="EnterConfirmationToTargetCount" xml:space="preserve">
+    <value>Enter Confirmation To Target Count</value>
+    <comment/>
+  </data>
+  <data name="Estimate_mode" xml:space="preserve">
+    <value>Estimate Mode</value>
+    <comment/>
+  </data>
+  <data name="SelectEstimate_mode" xml:space="preserve">
+    <value>Select Estimate Mode</value>
+    <comment/>
+  </data>
+  <data name="Subtractfeefromamount" xml:space="preserve">
+    <value>Subtract fee from amount</value>
+    <comment/>
+  </data>
+  <data name="AvoidReuse" xml:space="preserve">
+    <value>Avoid Reuse</value>
+    <comment/>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+    <comment/>
+  </data>
+  <data name="PrivateKey" xml:space="preserve">
+    <value>Private Key</value>
+    <comment/>
+  </data>
+  <data name="DumpWallet" xml:space="preserve">
+    <value>Dump Wallet</value>
+    <comment/>
+  </data>
+  <data name="SendToAddress" xml:space="preserve">
+    <value>Send To Address</value>
+    <comment/>
+  </data>
+</root>

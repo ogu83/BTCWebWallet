@@ -90,13 +90,13 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="checked" id="chkReplaceable">
+                        <input class="form-check-input" type="checkbox" id="chkReplaceable" checked> 
                         <label class="form-check-label" for="chkReplaceable">
                             @Localizer["Replaceable"]
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value='@(Model.WalletInfo.Avoid_reuse ? "checked" : "")' id="chkAvoidReuse">
+                        <input class="form-check-input" type="checkbox" id="chkAvoidReuse" @(Model.WalletInfo.Avoid_reuse ? "checked" : "")>
                         <label class="form-check-label" for="chkAvoidReuse">
                             @Localizer["AvoidReuse"]
                         </label>
@@ -154,6 +154,40 @@
         var model = {
             passphrase: passphrase,
             name: name
+        };
+
+        $.post(url, model, "json")
+            .done(function (result) {
+                window.location.reload();
+            });
+    }
+
+    function SendToAddress() {
+        var name = "@Model?.WalletInfo?.Walletname";
+        var address = $("#txtAddress").val();
+        var amount = $("#txtAmount").val();
+        var comment = $("#txtComment").val();
+        var comment_to = $("#txtCommentTo").val();
+        var conf_target = $("#txtConf_target").val();
+        var estimate_mode = $("#ddEstimate_mode").val();
+        var subtractfeefromamount = $("#chkSubtractfeefromamount").prop("checked");
+        var replaceable = $("#chkReplaceable").prop("checked");
+        var avoidReuse = $("#chkAvoidReuse").prop("checked");
+
+        var controllerName = "Wallet";
+        var actionName = "@nameof(WalletController.SendToAddress)";
+        var url = `/${controllerName}/${actionName}`;
+        var model = {
+            name: name,
+            address: address,
+            amount: amount,
+            comment: comment,
+            comment_to: comment_to,
+            conf_target: conf_target,
+            estimate_mode: estimate_mode,
+            subtractfeefromamount: subtractfeefromamount,
+            replaceable: replaceable,
+            avoidReuse: avoidReuse
         };
 
         $.post(url, model, "json")

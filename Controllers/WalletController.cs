@@ -134,7 +134,7 @@ public class WalletController : BaseController
                 Trusted = t.Trusted,
                 Comment = t.Comment,
                 Bip125Replaceable = t.Bip125Replaceable
-            }).ToList();
+            }).OrderByDescending(x=>x.Time).ToList();
             model.Transactions = transactionsModel;
         }
 
@@ -213,7 +213,8 @@ public class WalletController : BaseController
     public async Task<IActionResult> SendToAddress(
         string name, string address, decimal amount,
         string comment, string comment_to,
-        bool subtractfeefromamount, bool replaceable, int conf_target, string estimate_mode, bool avoid_reuse)
+        bool subtractfeefromamount, bool replaceable, 
+        int conf_target, string estimate_mode, bool avoid_reuse)
     {
         var response = await _rpcClient.SendToAddress(new SendToAddressRequest(
             rpc_id, name,

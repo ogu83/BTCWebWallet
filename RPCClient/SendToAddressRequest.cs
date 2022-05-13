@@ -6,7 +6,7 @@ public class SendToAddressRequest : RPCWalletRequest
     public const string ESTIMATE_MODE_ECONOMICAL = "economical";
     public const string ESTIMATE_MODE_CONSERVATIVE = "conservative";
 
-    private const string method_name = "senttotaddress";
+    private const string method_name = "sendtoaddress";
 
     /// <summary>
     /// sendtoaddress "address" amount ( "comment" "comment_to" subtractfeefromamount replaceable conf_target "estimate_mode" avoid_reuse fee_rate verbose )
