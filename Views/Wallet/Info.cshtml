@@ -4,7 +4,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = Localizer["Wallet"] + " " + Model?.WalletInfo?.Walletname;
+    ViewData["Title"] = Model?.WalletInfo?.Walletname;
 }
 
 @model WalletViewModel
@@ -12,6 +12,22 @@
 @if (Model != null && Model.IsSuccess)
 {
     <h2><a asp-action="Index">@Localizer["Wallets"]</a> > @Model.WalletInfo?.Walletname</h2>
+
+    <div class="row">
+        <div class="col">
+            <div class="btn-group btn-group-lg">
+                <button class="btn btn-lg btn-success" data-bs-toggle="modal" data-bs-target="#sendToAddressModal">
+                    <i class="bi bi-send"></i> @Localizer["Send"]
+                </button>
+                <button class="btn btn-lg btn-info" data-bs-toggle="modal" data-bs-target="#">
+                    <i class="bi bi-cloud-download"></i> @Localizer["Backup"]
+                </button>
+                <button class="btn btn-lg btn-info" data-bs-toggle="modal" data-bs-target="#">
+                    <i class="bi bi-key"></i> @Localizer["DumpWallet"]
+                </button>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col p-1">
@@ -28,35 +44,102 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Send To Address Modal -->
+    <div class="modal fade" id="sendToAddressModal" tabindex="-1" aria-labelledby="sendToAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sendToAddressModalLabel">@Localizer["SendToAddress"]</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-1">
+                        <label for="txtAddress" class="form-label">@Localizer["Address"]</label>
+                        <input id="txtAddress" class="form-control" placeholder='@Localizer["EnterReceiverAddress"]' />
+                    </div>
+                    <div class="mb-1">
+                        <label for="txtAmount" class="form-label">@Localizer["Amount"]</label>
+                        <input id="txtAmount" class="form-control" placeholder='@Localizer["EnterAnAmount"]' type="number" min="0" step="0.0001" />
+                    </div>
+                    <div class="mb-1">
+                        <label for="txtComment" class="form-label">@Localizer["Comment"]</label>
+                        <input id="txtComment" class="form-control" placeholder='@Localizer["EnterAComment"]' />
+                    </div>
+                    <div class="mb-1">
+                        <label for="txtCommentTo" class="form-label">@Localizer["ReceiverName"]</label>
+                        <input id="txtCommentTo" class="form-control" placeholder='@Localizer["EnterReceiverName"]' />
+                    </div>
+                   
+                    <div class="mb-1">
+                        <label for="txtConf_target" class="form-label">@Localizer["ConfirmationToTarget"]</label>
+                        <input id="txtConf_target" class="form-control" placeholder='@Localizer["EnterConfirmationToTargetCount"]' type="number" min="1" value="6" step="1" />
+                    </div>
+                    <div class="mb-1">
+                        <label for="ddEstimate_mode" class="form-label">@Localizer["Estimate_mode"]</label>
+                        <select id="ddEstimate_mode" class="form-select" placeholder='@Localizer["SelectEstimate_mode"]'>
+                            <option value="unset">unset</option>
+                            <option value="economical">economical</option>
+                            <option value="conservative">conservative</option>
+                        </select>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="chkSubtractfeefromamount">
+                        <label class="form-check-label" for="chkSubtractfeefromamount">
+                            @Localizer["Subtractfeefromamount"]
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="checked" id="chkReplaceable">
+                        <label class="form-check-label" for="chkReplaceable">
+                            @Localizer["Replaceable"]
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value='@(Model.WalletInfo.Avoid_reuse ? "checked" : "")' id="chkAvoidReuse">
+                        <label class="form-check-label" for="chkAvoidReuse">
+                            @Localizer["AvoidReuse"]
+                        </label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Close"]</button>
+                    <button type="button" class="btn btn-primary" onclick="SendToAddress();">@Localizer["Send"]</button>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <!-- Add Address  Modal -->
     <div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addAddressModalLabel">@Localizer["AddNewAddress"]</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-1">
-                    <label for="txtLabel" class="form-label">@Localizer["Label"]</label>
-                    <input id="txtLabel" class="form-control" placeholder='@Localizer["EnterAlabel"]' />
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAddressModalLabel">@Localizer["AddNewAddress"]</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="mb-1">
-                    <label for="ddAddressType" class="form-label">@Localizer["Label"]</label>
-                    <select id="ddAddressType" class="form-select" placeholder='@Localizer["EnterAlabel"]'>
-                        <option value="legacy">legacy</option>
-                        <option value="p2sh-segwit">p2sh-segwit</option>
-                        <option value="bech32">bech32</option>
-                    </select>
+                <div class="modal-body">
+                    <div class="mb-1">
+                        <label for="txtLabel" class="form-label">@Localizer["Label"]</label>
+                        <input id="txtLabel" class="form-control" placeholder='@Localizer["EnterAlabel"]' />
+                    </div>
+                    <div class="mb-1">
+                        <label for="ddAddressType" class="form-label">@Localizer["Label"]</label>
+                        <select id="ddAddressType" class="form-select" placeholder='@Localizer["EnterAlabel"]'>
+                            <option value="legacy">legacy</option>
+                            <option value="p2sh-segwit">p2sh-segwit</option>
+                            <option value="bech32">bech32</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Close"]</button>
-                <button type="button" class="btn btn-primary" onclick="AddNewAddress();">@Localizer["Add"]</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Close"]</button>
+                    <button type="button" class="btn btn-primary" onclick="AddNewAddress();">@Localizer["Add"]</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 }
 
 @section scripts {

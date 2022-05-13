@@ -381,4 +381,64 @@
     <value>Replaceable</value>
     <comment/>
   </data>
+  <data name="EnterReceiverAddress" xml:space="preserve">
+    <value>Enter Receiver Address</value>
+    <comment/>
+  </data>
+  <data name="EnterAnAmount" xml:space="preserve">
+    <value>Enter An Amount</value>
+    <comment/>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+    <comment/>
+  </data>
+  <data name="EnterReceiverName" xml:space="preserve">
+    <value>Enter Receiver Name</value>
+    <comment/>
+  </data>
+  <data name="ReceiverName" xml:space="preserve">
+    <value>Receiver Name</value>
+    <comment/>
+  </data>
+  <data name="ConfirmationToTarget" xml:space="preserve">
+    <value>Confirmation To Target</value>
+    <comment/>
+  </data>
+  <data name="EnterConfirmationToTargetCount" xml:space="preserve">
+    <value>Enter Confirmation To Target Count</value>
+    <comment/>
+  </data>
+  <data name="Estimate_mode" xml:space="preserve">
+    <value>Estimate Mode</value>
+    <comment/>
+  </data>
+  <data name="SelectEstimate_mode" xml:space="preserve">
+    <value>Select Estimate Mode</value>
+    <comment/>
+  </data>
+  <data name="Subtractfeefromamount" xml:space="preserve">
+    <value>Subtract fee from amount</value>
+    <comment/>
+  </data>
+  <data name="AvoidReuse" xml:space="preserve">
+    <value>Avoid Reuse</value>
+    <comment/>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+    <comment/>
+  </data>
+  <data name="PrivateKey" xml:space="preserve">
+    <value>Private Key</value>
+    <comment/>
+  </data>
+  <data name="DumpWallet" xml:space="preserve">
+    <value>Dump Wallet</value>
+    <comment/>
+  </data>
+  <data name="SendToAddress" xml:space="preserve">
+    <value>Send To Address</value>
+    <comment/>
+  </data>
 </root>

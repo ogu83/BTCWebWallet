@@ -10,7 +10,7 @@
     <div class="card-header">
         @Localizer["Addresses"]
         <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addAddressModal">
-            <i class="bi bi-plus"></i> Add
+            <i class="bi bi-plus"></i> @Localizer["Add"]
         </button>
     </div>
     <div class="card-body">
@@ -32,7 +32,8 @@
                             <td>@a.Label</td>
                             <td>
                                 <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-sm btn-secondary"><i class="bi bi-qr-code"></i></button>
+                                    <button class="btn btn-sm btn-secondary"><i class="bi bi-qr-code"></i> @Localizer["Qr"]</button>
+                                    <button class="btn btn-lg btn-info"><i class="bi bi-key"></i> @Localizer["PrivateKey"]</button>
                                 </div>
                             </td>
                         </tr>
