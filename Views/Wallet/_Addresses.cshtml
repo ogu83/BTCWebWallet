@@ -27,13 +27,17 @@
                     @foreach (var a in Model.Addresses)
                     {
                         <tr>
-                            <td>@a.Key</td>
+                            <td>
+                                <span>@a.Key</span>
+                                <br />
+                                <span class="fw-lighter" id="priv_@a.Key"></span>
+                            </td>
                             <td>@a.Purpose</td>
                             <td>@a.Label</td>
                             <td>
                                 <div class="btn-group btn-group-sm">
                                     <button class="btn btn-sm btn-secondary"><i class="bi bi-qr-code"></i> @Localizer["Qr"]</button>
-                                    <button class="btn btn-lg btn-info"><i class="bi bi-key"></i> @Localizer["PrivateKey"]</button>
+                                    <button class="btn btn-lg btn-info" onclick='DumpPrivKey("@a.Key");'><i class="bi bi-key"></i> @Localizer["PrivateKey"]</button>
                                 </div>
                             </td>
                         </tr>

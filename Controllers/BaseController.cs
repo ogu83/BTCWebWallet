@@ -1,4 +1,5 @@
 using System.Text;
+using System.Web;
 using BTCWebWallet.Models;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -80,7 +81,7 @@ public class BaseController : Controller
         return new ErrorViewModel
         {
             Code = error.Code,
-            Message = error.Message,
+            Message = HttpUtility.HtmlEncode(error.Message),
             Type = ErrorViewModel.ErrorType.RCPError
         };
     }

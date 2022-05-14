@@ -215,5 +215,26 @@
                 window.location.reload();
             });
     }
+
+
+    function DumpPrivKey(address) {
+        if (!address)
+            return;
+
+        var name = "@Model?.WalletInfo?.Walletname";
+
+        var controllerName = "Wallet";
+        var actionName = "@nameof(WalletController.DumpPrivKey)";
+        var url = `/${controllerName}/${actionName}`;
+        var model = {
+            name: name,
+            address: address
+        };
+
+        $.post(url, model, "json")
+            .done(function (result) {
+                $("#priv_" + address).text(result);
+            });
+    }
 </script>
 }

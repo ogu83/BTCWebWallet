@@ -176,4 +176,11 @@ public class RPCClient : IRPCClient
         var castedResponse = response as SendToAddressResponse;
         return castedResponse;
     }
+
+    public async Task<DumpPrivKeyResponse> DumpPrivKey(DumpPrivKeyRequest request)
+    {
+        var response = await GetWalletResponse<DumpPrivKeyResponse>(request);
+        var castedResponse = response as DumpPrivKeyResponse;
+        return castedResponse;
+    }
 }

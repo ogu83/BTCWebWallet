@@ -210,6 +210,7 @@ public class WalletController : BaseController
         return Json(true);
     }
 
+    [HttpPost]
     public async Task<IActionResult> SendToAddress(
         string name, string address, decimal amount,
         string comment, string comment_to,
@@ -226,6 +227,20 @@ public class WalletController : BaseController
         {
             _logger.LogError($"RPC Error {response.Error}");
             AddPageError(RPCErrorToErrorViewModel(response.Error));
+        }
+
+        return Json(response.Result?.Value);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DumpPrivKey(string name, string address)
+    {
+        var response = await _rpcClient.DumpPrivKey(new DumpPrivKeyRequest(rpc_id, name, address));
+        if (response.HasError)
+        {
+            _logger.LogError($"RPC Error {response.Error}");
+            //AddPageError(RPCErrorToErrorViewModel(response.Error));
+            return Json(response.Error.ToString());
         }
 
         return Json(response.Result?.Value);
