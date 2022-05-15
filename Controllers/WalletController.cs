@@ -12,18 +12,21 @@ public class WalletController : BaseController
     private readonly IRPCClient _rpcClient;
     private readonly IStringLocalizer<WalletController> _localizer;
     private readonly IConfiguration _configuration;
+    private readonly IHostEnvironment _hostEnvironment;
 
     public WalletController(
         ILogger<WalletController> logger,
         IRPCClient rpcClient,
         IStringLocalizer<WalletController> localizer,
         IHttpContextAccessor httpContextAccessor,
-        IConfiguration configuration) : base(httpContextAccessor)
+        IConfiguration configuration,
+        IHostEnvironment hostEnvironment) : base(httpContextAccessor)
     {
         _logger = logger;
         _rpcClient = rpcClient;
         _localizer = localizer;
         _configuration = configuration;
+        _hostEnvironment = hostEnvironment;
     }
 
     public async Task<IActionResult> Index()
@@ -134,7 +137,7 @@ public class WalletController : BaseController
                 Trusted = t.Trusted,
                 Comment = t.Comment,
                 Bip125Replaceable = t.Bip125Replaceable
-            }).OrderByDescending(x=>x.Time).ToList();
+            }).OrderByDescending(x => x.Time).ToList();
             model.Transactions = transactionsModel;
         }
 
@@ -214,7 +217,7 @@ public class WalletController : BaseController
     public async Task<IActionResult> SendToAddress(
         string name, string address, decimal amount,
         string comment, string comment_to,
-        bool subtractfeefromamount, bool replaceable, 
+        bool subtractfeefromamount, bool replaceable,
         int conf_target, string estimate_mode, bool avoid_reuse)
     {
         var response = await _rpcClient.SendToAddress(new SendToAddressRequest(
@@ -258,5 +261,23 @@ public class WalletController : BaseController
         }
 
         return Json(true);
+    }
+
+    public async Task<IActionResult> DumpWallet(string name)
+    {
+        // const string walletFolder = "wallet_backup";
+
+        var file = $"{name}-{DateTime.Now.ToString("yyyyMMddTHHmmss")}.bak";
+        var path = $"{_hostEnvironment.ContentRootPath}wwwroot/{file}";
+        
+        var response = await _rpcClient.DumpWallet(new DumpWalletRequest(rpc_id, name, path));
+        if (response.HasError)
+        {
+            _logger.LogError($"RPC Error {response.Error}");
+            AddPageError(RPCErrorToErrorViewModel(response.Error));
+            return RedirectToAction(nameof(Info), new { name });
+        }
+
+        return Redirect($"/{file}");
     }
 }

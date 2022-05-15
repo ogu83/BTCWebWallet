@@ -10,3 +10,4 @@
 */.DS_Store/
 wwwroot/lib/bootstrap/dist/css/.DS_Store
 wwwroot/lib/bootstrap/dist/.DS_Store
+*.bak

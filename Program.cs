@@ -7,6 +7,7 @@ using BTCWebWallet.Helpers;
 using BTCWebWallet.RPCClient;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -123,7 +124,14 @@ else
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+// app.UseStaticFiles();
+
+var provider = new FileExtensionContentTypeProvider();
+provider.Mappings[".bak"] = "application/x-msdownload";
+app.UseStaticFiles(new StaticFileOptions
+{
+    ContentTypeProvider = provider
+});
 
 app.UseRouting();
 

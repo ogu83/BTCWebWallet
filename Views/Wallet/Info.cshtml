@@ -22,9 +22,9 @@
                 <button class="btn btn-lg btn-info" data-bs-toggle="modal" data-bs-target="#">
                     <i class="bi bi-cloud-download"></i> @Localizer["Backup"]
                 </button>
-                <button class="btn btn-lg btn-info" data-bs-toggle="modal" data-bs-target="#">
+                <a class="btn btn-lg btn-info" asp-action="DumpWallet" asp-route-name="@Model.WalletInfo?.Walletname">
                     <i class="bi bi-key"></i> @Localizer["DumpWallet"]
-                </button>
+                </a>
             </div>
         </div>
     </div>
