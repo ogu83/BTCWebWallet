@@ -140,6 +140,38 @@
             </div>
         </div>
     </div>
+
+    <!-- Add Private Key  Modal -->
+    <div class="modal fade" id="addPrivKeyModal" tabindex="-1" aria-labelledby="addPrivKeyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPrivKeyModalLabel">@Localizer["AddPrivKey"]</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-1">
+                        <label for="txtPrivKey" class="form-label">@Localizer["PrivKey"]</label>
+                        <input id="txtPrivKey" class="form-control" placeholder='@Localizer["EnterPrivKey"]' />
+                    </div>
+                    <div class="mb-1">
+                        <label for="txtPrivLabel" class="form-label">@Localizer["Label"]</label>
+                        <input id="txtPrivLabel" class="form-control" placeholder='@Localizer["EnterAlabel"]' />
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="chkRescan" checked>
+                        <label class="form-check-label" for="chkRescan">
+                            @Localizer["Rescan"]
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Close"]</button>
+                    <button type="button" class="btn btn-primary" onclick="ImportPrivKey();">@Localizer["Add"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 @section scripts {
@@ -234,6 +266,31 @@
         $.post(url, model, "json")
             .done(function (result) {
                 $("#priv_" + address).text(result);
+            });
+    }
+
+    function ImportPrivKey() {
+        var name = "@Model?.WalletInfo?.Walletname";
+        var privkey = $("#txtPrivKey").val();
+        var label = $("#txtPrivLabel").val();
+        var rescan = $("#chkRescan").prop("checked");
+
+        if (!privkey)
+            return;
+
+        var controllerName = "Wallet";
+        var actionName = "@nameof(WalletController.ImportPrivKey)"; 
+        var url = `/${controllerName}/${actionName}`;
+        var model = {
+            name: name,
+            privkey: privkey,
+            label: label,
+            rescan: rescan
+        };
+
+        $.post(url, model, "json")
+            .done(function (result) {
+                window.location.reload();
             });
     }
 </script>

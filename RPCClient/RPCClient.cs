@@ -183,4 +183,11 @@ public class RPCClient : IRPCClient
         var castedResponse = response as DumpPrivKeyResponse;
         return castedResponse;
     }
+
+    public async Task<ImportPrivKeyResponse> ImportPrivKey(ImportPrivKeyRequest request)
+    {
+                var response = await GetWalletResponse<ImportPrivKeyResponse>(request);
+        var castedResponse = response as ImportPrivKeyResponse;
+        return castedResponse;
+    }
 }

@@ -16,4 +16,5 @@ public interface IRPCClient
     Task<ListTransactionsResponse> GetListTransactions(ListTransactionsRequest request);
     Task<SendToAddressResponse> SendToAddress(SendToAddressRequest request);
     Task<DumpPrivKeyResponse> DumpPrivKey(DumpPrivKeyRequest request);
+    Task<ImportPrivKeyResponse> ImportPrivKey(ImportPrivKeyRequest request);
 }

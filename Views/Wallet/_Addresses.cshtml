@@ -9,9 +9,14 @@
 <div class="card panel-primary">
     <div class="card-header">
         @Localizer["Addresses"]
-        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addAddressModal">
-            <i class="bi bi-plus"></i> @Localizer["Add"]
-        </button>
+        <span class="btn-group btn-group-sm">
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addAddressModal">
+                <i class="bi bi-plus"></i> @Localizer["AddNew"]
+            </button>
+            <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#addPrivKeyModal">
+                <i class="bi bi-plus"></i> @Localizer["AddPrivKey"]
+            </button>            
+        </span>
     </div>
     <div class="card-body">
         <table class="table table-striped">

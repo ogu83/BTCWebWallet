@@ -342,7 +342,7 @@
     <comment/>
   </data>
   <data name="EnterAlabel" xml:space="preserve">
-    <value>Enter a label</value>
+    <value>Enter a Label</value>
     <comment/>
   </data>
   <data name="RecievedTime" xml:space="preserve">
@@ -386,7 +386,7 @@
     <comment/>
   </data>
   <data name="EnterAnAmount" xml:space="preserve">
-    <value>Enter An Amount</value>
+    <value>Enter an amount</value>
     <comment/>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -439,6 +439,22 @@
   </data>
   <data name="SendToAddress" xml:space="preserve">
     <value>Send To Address</value>
+    <comment/>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Add New</value>
+    <comment/>
+  </data>
+  <data name="AddPrivKey" xml:space="preserve">
+    <value>Add Private Key</value>
+    <comment/>
+  </data>
+  <data name="Rescan" xml:space="preserve">
+    <value>Rescan</value>
+    <comment/>
+  </data>
+  <data name="EnterAComment" xml:space="preserve">
+    <value>Enter a comment</value>
     <comment/>
   </data>
 </root>

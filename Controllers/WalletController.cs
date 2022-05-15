@@ -245,4 +245,18 @@ public class WalletController : BaseController
 
         return Json(response.Result?.Value);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> ImportPrivKey(string name, string privkey, string label, bool rescan)
+    {
+        var response = await _rpcClient.ImportPrivKey(new ImportPrivKeyRequest(rpc_id, name, privkey, label, rescan));
+        if (response.HasError)
+        {
+            _logger.LogError($"RPC Error {response.Error}");
+            AddPageError(RPCErrorToErrorViewModel(response.Error));
+            return Json(false);
+        }
+
+        return Json(true);
+    }
 }

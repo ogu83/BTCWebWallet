@@ -441,4 +441,24 @@
     <value>Send To Address</value>
     <comment/>
   </data>
+  <data name="EnterAComment" xml:space="preserve">
+    <value>Enter a comment</value>
+    <comment/>
+  </data>
+  <data name="AddPrivKey" xml:space="preserve">
+    <value>Add Private Key</value>
+    <comment/>
+  </data>
+  <data name="PrivKey" xml:space="preserve">
+    <value>Private Key</value>
+    <comment/>
+  </data>
+  <data name="Rescan" xml:space="preserve">
+    <value>Rescan</value>
+    <comment/>
+  </data>
+  <data name="EnterPrivKey" xml:space="preserve">
+    <value>Enter a private key</value>
+    <comment/>
+  </data>
 </root>
